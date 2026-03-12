@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@source "../src";
+
+@theme {
+  --color-background: #020617;
+  --color-foreground: #cbd5e1;
+}
+
+/* Ensure the background fills the screen */
+body {
+  margin: 0;
+  background-color: #020617;
+  color: #cbd5e1;
+  min-height: 100vh;
+}
+
+
+
+@theme {
+  --animate-spin-slow: spin 4s linear infinite;
+}
+
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes electric-surge {
+  0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 5px #06b6d4); }
+  50% { opacity: 1; filter: drop-shadow(0 0 20px #22d3ee); }
+  20%, 80% { opacity: 0.9; }
+}
+
+.animate-surge {
+  animation: electric-surge 2s infinite;
+}
