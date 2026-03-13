@@ -2,8 +2,7 @@ import React from 'react';
 import ElectricBorder from '../bits/ElectricBorder';
 import GradientText from '../bits/GradientText';
 
-const ProfileCard = ({ name, university, cgpa }) => {
-  // Electric Theme Palette
+const ProfileCard = () => {
   const electricColors = ["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"];
 
   return (
@@ -27,13 +26,13 @@ const ProfileCard = ({ name, university, cgpa }) => {
           >
             <img 
               src="/profile.png" 
-              alt={name}
+              alt="Rayan Ahmed"
               className="relative w-44 h-44 object-cover rounded-2xl grayscale-[20%] hover:grayscale-0 transition-all duration-500"
             />
           </GradientText>
         </div>
 
-        {/* Identity Header - Electric Name */}
+        {/* Identity Header */}
         <div className="text-center mb-8">
           <GradientText
             colors={electricColors}
@@ -41,16 +40,15 @@ const ProfileCard = ({ name, university, cgpa }) => {
             showBorder={false}
             className="text-4xl font-extrabold tracking-tight"
           >
-            {name}
+            Rayan Ahmed
           </GradientText>
           <p className="text-cyan-400 font-mono text-xs uppercase tracking-[0.4em] mt-2 font-bold">
-            Full-Stack Developer
+            Full-Stack Developer & Editor
           </p>
         </div>
 
         {/* Info Grid */}
         <div className="space-y-5">
-          {/* Education Block - Electric University */}
           <div className="text-center group cursor-default">
             <span className="block text-slate-500 text-[10px] uppercase tracking-[0.2em] font-black mb-1">
               Graduated From
@@ -61,7 +59,7 @@ const ProfileCard = ({ name, university, cgpa }) => {
               showBorder={false}
               className="text-lg font-semibold leading-snug !justify-center"
             >
-              {university}
+              Daffodil International University
             </GradientText>
           </div>
 
@@ -84,7 +82,7 @@ const ProfileCard = ({ name, university, cgpa }) => {
                    CGPA
                  </span>
                  <span className="text-3xl text-cyan-400 font-mono font-black tracking-tighter group-hover/cgpa:scale-110 transition-transform duration-300">
-                   {cgpa}
+                   3.40
                  </span>
               </div>
             </div>
