@@ -5,9 +5,9 @@
 @theme {
   --color-background: #020617;
   --color-foreground: #cbd5e1;
+  --animate-spin-slow: spin 4s linear infinite;
 }
 
-/* Ensure the background fills the screen */
 body {
   margin: 0;
   background-color: #020617;
@@ -15,24 +15,37 @@ body {
   min-height: 100vh;
 }
 
-
-
-@theme {
-  --animate-spin-slow: spin 4s linear infinite;
+/* --- SWIPER CUSTOM FIXES --- */
+.project-swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 80px !important;
 }
 
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.swiper-button-next,
+.swiper-button-prev {
+  color: #06b6d4 !important;
+  transform: scale(0.7);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@keyframes electric-surge {
-  0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 5px #06b6d4); }
-  50% { opacity: 1; filter: drop-shadow(0 0 20px #22d3ee); }
-  20%, 80% { opacity: 0.9; }
+.swiper-pagination-bullet {
+  background: #334155 !important;
+  opacity: 1 !important;
 }
 
-.animate-surge {
-  animation: electric-surge 0.1s infinite;
+.swiper-pagination-bullet-active {
+  background: #06b6d4 !important;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+}
+
+/* Clean up App.css centering conflicts */
+#root {
+  max-width: 100% !important; /* Allow carousel to span full width */
+  padding: 0 !important;
+  text-align: left !important; /* Fix alignment for the grid items */
 }
