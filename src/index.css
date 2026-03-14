@@ -34,5 +34,5 @@ body {
 }
 
 .animate-surge {
-  animation: electric-surge 2s infinite;
+  animation: electric-surge 0.1s infinite;
 }

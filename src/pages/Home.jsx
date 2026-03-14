@@ -65,7 +65,7 @@ const Home = ({ data }) => {
         <ServiceEngine />
       </section>
 
-      <Footer />
+      
     </main>
   );
 };

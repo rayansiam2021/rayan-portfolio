@@ -6,6 +6,7 @@ import About from './pages/About';
 import Project from './pages/Project';
 import Service from './pages/Service';
 import Contact from './pages/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,12 +17,14 @@ function App() {
         {/* Main Content spans full width now */}
         <main className="w-full">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/project" element={<Project />} />
-            <Route path="/service" element={<Service />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+  {/* Keep this: This handles the Card click (/project/satsport) */}
+  <Route path="/project/:projectId" element={<Project />} />
+  <Route path="/service" element={<Service />} />
+  <Route path="/contact" element={<Contact />} />
+</Routes>
+          <Footer />
         </main>
       </div>
     </Router>

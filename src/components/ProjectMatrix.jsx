@@ -1,61 +1,25 @@
 import React from 'react';
-import { ExternalLink, Github, Zap, Terminal } from 'lucide-react';
+import { ExternalLink, Github, Zap, Terminal, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom'; // 1. Import Link
+import { projectsData } from '../data/projectsData'; // 2. Import your "Brain" file
 import ElectricBorder from './bits/ElectricBorder';
 import GradientText from './bits/GradientText';
-
-const projects = [
-  {
-    title: "SatSport Exchange",
-    category: "Web Development",
-    desc: "A high-performance sports betting exchange platform with real-time API integration for cricket and football markets.",
-    tags: ["Angular", "FastAPI", "API"],
-    status: "DEPLOYED",
-    color: "#00f2ff", // Cyan
-    colorArray: ["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]
-  },
-  {
-    title: "IoT Smart Car",
-    category: "Embedded Systems",
-    desc: "Autonomous vehicle prototype featuring obstacle avoidance, real-time sensor processing, and firmware logic.",
-    tags: ["C++", "Arduino", "Sensors"],
-    status: "PROTOTYPE",
-    color: "#fb923c", // Orange
-    colorArray: ["#fb923c", "#ffffff", "#ffedd5", "#f97316", "#fb923c"]
-  },
-  {
-    title: "Multi Drop Fusion",
-    category: "E-Commerce",
-    desc: "A retail powerhouse specializing in mobile tech accessories with a high-conversion SEO architecture.",
-    tags: ["WooCommerce", "SEO", "Marketing"],
-    status: "LIVE",
-    color: "#10b981", // Green/Emerald
-    colorArray: ["#10b981", "#ffffff", "#d1fae5", "#059669", "#10b981"]
-  },
-  {
-    title: "AI Content Guard",
-    category: "Full-Stack AI",
-    desc: "Enterprise-grade plagiarism and AI detection system utilizing custom FastAPI logic and Python models.",
-    tags: ["FastAPI", "Python", "React"],
-    status: "STABLE",
-    color: "#ef4444", // Red
-    colorArray: ["#ef4444", "#ffffff", "#fee2e2", "#b91c1c", "#ef4444"]
-  }
-];
 
 const ProjectMatrix = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4 py-20">
-      {projects.map((project, index) => (
-        <div key={index} className="group relative">
+      {/* 3. Map over projectsData instead of a local array */}
+      {projectsData.map((project, index) => (
+        <div key={project.id} className="group relative">
           
-          {/* Ambient Glow matching the specific project color */}
+          {/* Ambient Glow */}
           <div 
             className="absolute -inset-2 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"
-            style={{ backgroundColor: `${project.color}10` }}
+            style={{ backgroundColor: `${project.color || '#00f2ff'}10` }}
           ></div>
           
           <ElectricBorder 
-            color={project.color} 
+            color={project.color || '#00f2ff'} 
             speed={1.2} 
             chaos={0.02} 
             borderRadius={16}
@@ -66,8 +30,8 @@ const ProjectMatrix = () => {
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-2">
                   <div 
-                    className="w-2 h-2 rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.5)]" 
-                    style={{ backgroundColor: project.color }}
+                    className="w-2 h-2 rounded-full animate-pulse" 
+                    style={{ backgroundColor: project.color || '#00f2ff' }}
                   ></div>
                   <span className="text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
                     {project.category}
@@ -75,14 +39,17 @@ const ProjectMatrix = () => {
                 </div>
                 <div className="flex gap-4 text-slate-500">
                   <Github size={18} className="hover:text-white cursor-pointer transition-colors" />
-                  <ExternalLink size={18} className="hover:text-cyan-400 cursor-pointer transition-colors" />
+                  {/* 4. Functional Link to the dynamic page */}
+                  <Link to={`/project/${project.id}`}>
+                    <ExternalLink size={18} className="hover:text-cyan-400 cursor-pointer transition-colors" />
+                  </Link>
                 </div>
               </div>
 
-              {/* Animated Title with Dynamic Gradient */}
+              {/* Animated Title */}
               <div className="mb-4">
                 <GradientText
-                  colors={project.colorArray}
+                  colors={project.colorArray || ["#00f2ff", "#ffffff"]}
                   animationSpeed={8}
                   showBorder={false}
                   className="text-2xl font-bold !justify-start !mx-0"
@@ -92,40 +59,33 @@ const ProjectMatrix = () => {
               </div>
               
               <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
-                {project.desc}
+                {project.shortDesc}
               </p>
 
-              {/* Tech Tags */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.tags.map((tag, i) => (
-                  <span 
-                    key={i} 
-                    className="text-[9px] font-mono font-bold bg-white/5 text-slate-400 px-3 py-1 rounded-full border border-white/5 group-hover:border-white/20 transition-all"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* 5. View Project Button - The "Call to Action" */}
+              <div className="mb-8">
+                 <Link 
+                   to={`/project/${project.id}`}
+                   className="group/btn inline-flex items-center gap-2 text-[11px] font-black tracking-widest text-cyan-400 uppercase hover:text-white transition-all"
+                 >
+                   Open Dossier 
+                   <ArrowUpRight size={14} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                 </Link>
               </div>
 
               {/* Footer System Status */}
               <div className="pt-5 flex items-center justify-between border-t border-white/5">
                 <div className="flex items-center gap-2">
-                  <Terminal size={12} style={{ color: project.color }} />
+                  <Terminal size={12} style={{ color: project.color || '#00f2ff' }} />
                   <span className="text-[10px] text-slate-500 font-mono tracking-tighter">
-                    SYSTEM::AUTO_REF_ID_<span style={{ color: `${project.color}cc` }}>{project.status}</span>
+                    REF_ID::<span style={{ color: `${project.color || '#00f2ff'}cc` }}>{project.id.toUpperCase()}</span>
                   </span>
                 </div>
-                <div className="relative">
-                   <Zap 
-                     size={16} 
-                     style={{ color: project.color }} 
-                     className="opacity-20 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" 
-                   />
-                   <div 
-                     className="absolute inset-0 blur-lg opacity-0 group-hover:opacity-40 rounded-full transition-opacity"
-                     style={{ backgroundColor: project.color }}
-                   ></div>
-                </div>
+                <Zap 
+                  size={16} 
+                  style={{ color: project.color || '#00f2ff' }} 
+                  className="opacity-20 group-hover:opacity-100 transition-all duration-500" 
+                />
               </div>
             </div>
           </ElectricBorder>
