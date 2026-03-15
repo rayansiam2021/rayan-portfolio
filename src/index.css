@@ -8,29 +8,45 @@
   --animate-spin-slow: spin 4s linear infinite;
 }
 
+/* --- ULTRA SMOOTH GLOBAL FIXES --- */
+* {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+}
+
 body {
   margin: 0;
   background-color: #020617;
   color: #cbd5e1;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* --- SWIPER CUSTOM FIXES --- */
+section {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout;
+}
+
+/* Optimize the heavy blurs */
+.blur-\[120px\], .blur-\[150px\], .blur-\[50px\] {
+  will-change: filter;
+  transform: translateZ(0);
+}
+
+/* --- SWIPER CUSTOM STYLES --- */
 .project-swiper {
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 80px !important;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: #06b6d4 !important;
-  transform: scale(0.7);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+:global(.swiper-wrapper) {
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
+  will-change: transform;
 }
 
 .swiper-pagination-bullet {
@@ -40,12 +56,19 @@ body {
 
 .swiper-pagination-bullet-active {
   background: #06b6d4 !important;
+  width: 20px !important;
+  border-radius: 4px !important;
   box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
 }
 
-/* Clean up App.css centering conflicts */
 #root {
-  max-width: 100% !important; /* Allow carousel to span full width */
+  max-width: 100% !important;
+  margin: 0 !important;
   padding: 0 !important;
-  text-align: left !important; /* Fix alignment for the grid items */
+  text-align: left !important;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

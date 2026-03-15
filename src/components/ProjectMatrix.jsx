@@ -1,166 +1,155 @@
-import React from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { motion } from 'framer-motion';
-import { Terminal, Zap, ArrowUpRight } from 'lucide-react';
+import { Terminal, ChevronLeft, ChevronRight, Cpu, Code2, ExternalLink, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 import GradientText from './bits/GradientText';
 
-// Swiper Styles
+// Import FontAwesome or use simple colorful img icons for tech
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const ProjectCard = ({ project, isActive }) => {
+const ProjectCard = React.memo(({ project, isActive }) => {
   const navigate = useNavigate();
 
-  // Simple, bug-free click handler
-  const handleAction = (e) => {
-    e.preventDefault();
-    e.stopPropagation(); 
-    navigate(`/project/${project.id}`);
-  };
-
   return (
-    <div
-      className={`relative h-[530px] w-full transition-all duration-700 ${
-        isActive ? 'z-30 opacity-100 scale-105' : 'z-10 opacity-30 blur-[2px] scale-90'
-      }`}
-    >
-      {/* --- VIBRANT AURA GLOW --- */}
+    <div className={`relative h-[480px] w-full transition-all duration-500 ease-out select-none transform-gpu ${
+        isActive ? 'z-30 opacity-100 scale-100' : 'z-10 opacity-40 scale-90'
+      }`}>
+      
+      {/* GLOWING BORDER */}
       {isActive && (
-        <div 
-          className="absolute inset-[-40px] opacity-25 blur-[60px] pointer-events-none rounded-full"
-          style={{ background: project.color }}
-        />
+        <div className="absolute inset-[-1px] rounded-[16px] overflow-hidden z-0">
+           <div className="absolute inset-[-150%] animate-[spin_4s_linear_infinite]"
+            style={{ background: `conic-gradient(from 0deg, transparent 70%, ${project.color} 90%, transparent 100%)` }} />
+        </div>
       )}
 
-      <div className="relative h-full w-full">
+      {/* COMPACT BODY (70% scale feel) */}
+      <div className="relative h-full bg-[#030712] border border-white/10 rounded-[15px] overflow-hidden flex flex-col">
         
-        {/* --- SPINNING BORDER LINE --- */}
-        {isActive && (
-          <div className="absolute inset-[-2px] rounded-[26px] overflow-hidden z-0">
-             <div 
-              className="absolute inset-[-150%] animate-[spin_4s_linear_infinite]"
-              style={{
-                background: `conic-gradient(from 0deg, transparent 60%, ${project.color} 80%, transparent 100%)`
-              }}
-             />
+        {/* HEADER */}
+        <div className="flex items-center justify-between px-4 py-2 bg-[#0d111c] border-b border-white/5 shrink-0">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
           </div>
-        )}
-
-        {/* --- MAIN CARD BODY (2D ONLY) --- */}
-        <div className={`relative h-full bg-[#0b1222]/98 border rounded-[24px] overflow-hidden flex flex-col transition-all duration-700 ${
-          isActive ? 'border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)]' : 'border-white/5'
-        }`}>
-          
-          {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 bg-white/5 border-b border-white/5">
-            <div className="flex gap-2">
-              <div className={`w-2 h-2 rounded-full bg-red-500/80 ${isActive && 'animate-pulse shadow-[0_0_8px_red]'}`} />
-              <div className={`w-2 h-2 rounded-full bg-green-500/80 ${isActive && 'shadow-[0_0_8px_green]'}`} />
-            </div>
-            <span className="text-[10px] font-mono tracking-[0.3em] text-slate-500">ID::{project.id.split('-')[0]}</span>
+          <div className="text-[8px] font-mono font-black text-slate-500 tracking-tighter uppercase">
+            ID::{project.id.split('-')[0]}
           </div>
+        </div>
 
-          {/* Banner */}
-          <div className="relative h-44 shrink-0 overflow-hidden">
-            <img 
-              src={project.banner} 
-              className={`w-full h-full object-cover transition-all duration-1000 ${isActive ? 'opacity-90 scale-100' : 'opacity-10'}`} 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b1222] via-transparent" />
+        {/* IMAGE PREVIEW (Fixed Height) */}
+        <div className="relative h-32 shrink-0 bg-black">
+          <img src={project.banner} alt="" className="w-full h-full object-cover opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] to-transparent" />
+          <div className="absolute bottom-3 right-3 p-2 rounded-lg bg-[#0d111c] border border-white/10" style={{ color: project.color }}>
+            <Cpu size={14} />
           </div>
+        </div>
 
-          {/* Content Area */}
-          <div className="p-8 flex flex-col flex-grow">
+        {/* CONTENT AREA (Properly Fitted) */}
+        <div className="p-5 flex flex-col flex-grow overflow-hidden">
+          <div className="mb-2">
             <GradientText
-              colors={isActive ? [project.color, "#ffffff", project.color] : ["#334155", "#0f172a"]}
-              className="text-2xl font-black uppercase mb-3 tracking-tighter"
+              colors={isActive ? ["#ffffff", project.color] : ["#475569", "#1e293b"]}
+              className="text-lg font-black uppercase tracking-tight !justify-start !mx-0"
             >
               {project.title}
             </GradientText>
-            
-            <p className={`text-sm line-clamp-3 mb-8 font-light leading-relaxed ${isActive ? 'text-slate-400' : 'text-slate-800'}`}>
-              {project.shortDesc || project.blogContent.overview}
-            </p>
+          </div>
+          
+          <p className="text-[9px] font-mono font-black text-cyan-500/80 mb-3 tracking-widest uppercase">
+            STATUS_ONLINE
+          </p>
 
-            {/* BUTTON: Solid Hitbox without 3D interference */}
-            <div className="mt-auto">
-              <button 
-                onClick={handleAction}
-                className="group relative w-full inline-flex items-center justify-center gap-3 text-[11px] font-bold tracking-widest uppercase py-4 px-6 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all active:scale-95 overflow-hidden"
-                style={{ color: isActive ? project.color : 'transparent' }}
-              >
-                {/* Internal Hover Glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity" style={{ background: project.color }} />
-                
-                <Terminal size={14} className="group-hover:rotate-12 transition-transform" /> 
-                Open Project Data 
-                <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </div>
+          <p className="text-[12px] text-slate-300 leading-snug line-clamp-3 mb-4 font-medium">
+             {project.shortDesc || project.blogContent.overview}
+          </p>
+          
+          {/* TECH STACK WITH COLORFUL ACCENTS */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {['React', 'Node', 'Tailwind'].map((tech) => (
+              <div key={tech} className="flex items-center gap-1.5 px-2.5 py-1 bg-white/5 border border-white/10 rounded-md">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.color }} />
+                <span className="text-[10px] font-bold text-white uppercase tracking-tighter">{tech}</span>
+              </div>
+            ))}
           </div>
 
-          {/* Footer */}
-          <div className="px-7 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
+          {/* ACTION BUTTON */}
+          <button 
+            onClick={() => navigate(`/project/${project.id}`)}
+            className="mt-auto group flex items-center justify-between py-3 px-5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-95"
+          >
             <div className="flex items-center gap-2">
-              <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'animate-pulse' : 'opacity-10'}`} style={{ backgroundColor: project.color }} />
-              <span className="text-[9px] font-mono uppercase text-slate-500">Node::{project.id.split('-')[0]}</span>
+              <Code2 size={14} style={{ color: project.color }} />
+              <span className="text-[10px] font-black tracking-[0.2em] text-white">EXECUTE_ARCHIVE</span>
             </div>
-            <Zap size={14} className={isActive ? 'opacity-100' : 'opacity-0'} style={{ color: project.color }} />
+            <ExternalLink size={14} className="text-white/40" />
+          </button>
+        </div>
+
+        {/* COMPACT FOOTER */}
+        <div className="px-4 py-2 bg-[#0d111c] border-t border-white/5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-emerald-500" />
+            <span className="text-[9px] font-mono font-bold text-slate-500">LIVE_SRC v2.0</span>
           </div>
+          <Zap size={10} className="text-yellow-500" />
         </div>
       </div>
     </div>
   );
-};
+});
 
 const ProjectMatrix = () => {
+  const slides = useMemo(() => projectsData, []);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   return (
-    <div className="w-full py-12 overflow-hidden">
+    <div className="w-full py-8 px-4 overflow-hidden relative group bg-[#010409]">
+      
+      {/* ARROW BUTTONS (Restored & Sharp) */}
+      <button ref={prevRef} className="absolute left-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex">
+        <ChevronLeft size={28} />
+      </button>
+      
+      <button ref={nextRef} className="absolute right-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex">
+        <ChevronRight size={28} />
+      </button>
+
       <Swiper
         effect={'coverflow'}
-        grabCursor={true}
         centeredSlides={true}
         loop={true}
         slidesPerView={'auto'}
-        slideToClickedSlide={true}
-        coverflowEffect={{ 
-          rotate: 0, 
-          stretch: -15, 
-          depth: 150, 
-          modifier: 1, 
-          slideShadows: false 
+        speed={600}
+        navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+        onBeforeInit={(swiper) => {
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
         }}
-        autoplay={{ delay: 6000, disableOnInteraction: true }}
-        navigation={true}
+        coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 2, slideShadows: false }}
         pagination={{ clickable: true }}
         modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
-        className="project-swiper !pb-28"
+        className="project-swiper !pb-16"
       >
-        {projectsData.map((project) => (
-          <SwiperSlide key={project.id} className="!w-[340px] md:!w-[400px] px-2 py-12">
+        {slides.map((project) => (
+          <SwiperSlide key={project.id} className="!w-[300px] md:!w-[380px] py-10">
             {({ isActive }) => <ProjectCard project={project} isActive={isActive} />}
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <style jsx>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        :global(.swiper-button-next), :global(.swiper-button-prev) {
-          z-index: 100 !important;
-          color: rgba(255,255,255,0.1);
-        }
-        :global(.swiper-button-next:hover), :global(.swiper-button-prev:hover) {
-          color: white;
-        }
+      <style>{`
+        .swiper-pagination-bullet { background: rgba(255,255,255,0.1) !important; opacity: 1 !important; }
+        .swiper-pagination-bullet-active { background: white !important; width: 24px !important; border-radius: 4px !important; }
       `}</style>
     </div>
   );

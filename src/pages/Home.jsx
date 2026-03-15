@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../components/Footer';
 import HeroContainer from '../components/Hero/HeroContainer';
 import StatsRibbon from '../components/StatsRibbon';
 import SkillTerminal from '../components/SkillTerminal';
@@ -10,19 +9,18 @@ const Home = ({ data }) => {
   return (
     <main className="bg-[#020617] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30">
       
-      {/* 1. HERO SECTION - Now cleared for the top navbar */}
+      {/* 1. HERO SECTION */}
       <section className="min-h-[90vh] flex items-center justify-center pt-24 px-4 relative">
-        {/* Ambient Glow background */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/5 blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/5 blur-[120px] pointer-events-none transform-gpu isolate"></div>
         <HeroContainer data={data} />
       </section>
 
       {/* 2. STATS RIBBON */}
       <StatsRibbon />
 
-      {/* 3. CAPABILITIES (Skill Terminal) */}
-      <section id="capabilities" className="py-32 px-4 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-cyan-500/5 blur-[150px] pointer-events-none"></div>
+      {/* 3. CAPABILITIES */}
+      <section id="capabilities" className="py-32 px-4 relative" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }}>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-cyan-500/5 blur-[150px] pointer-events-none transform-gpu"></div>
 
         <div className="max-w-5xl mx-auto relative">
           <header className="text-center mb-16">
@@ -39,7 +37,7 @@ const Home = ({ data }) => {
       </section>
 
       {/* 4. ARCHIVE (Project Matrix) */}
-      <section id="archive" className="py-32 px-4 relative border-t border-white/5 bg-[#030712]/30">
+      <section id="archive" className="py-32 px-4 relative border-t border-white/5 bg-[#030712]/30" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 800px' }}>
         <div className="max-w-7xl mx-auto relative">
           <header className="text-center mb-20">
             <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">
@@ -60,12 +58,11 @@ const Home = ({ data }) => {
         </div>
       </section>
 
-      {/* 5. SERVICES (Service Engine) */}
-      <section id="services" className="py-32 px-4 relative border-t border-white/5 bg-[#030712]/50">
+      {/* 5. SERVICES */}
+      <section id="services" className="py-32 px-4 relative border-t border-white/5 bg-[#030712]/50" style={{ contentVisibility: 'auto' }}>
         <ServiceEngine />
       </section>
 
-      
     </main>
   );
 };
