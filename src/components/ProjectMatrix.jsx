@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { projectsData } from '../data/projectsData';
 import GradientText from './bits/GradientText';
 
-// Import FontAwesome or use simple colorful img icons for tech
+// Swiper Styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -28,7 +28,7 @@ const ProjectCard = React.memo(({ project, isActive }) => {
         </div>
       )}
 
-      {/* COMPACT BODY (70% scale feel) */}
+      {/* COMPACT BODY */}
       <div className="relative h-full bg-[#030712] border border-white/10 rounded-[15px] overflow-hidden flex flex-col">
         
         {/* HEADER */}
@@ -43,7 +43,7 @@ const ProjectCard = React.memo(({ project, isActive }) => {
           </div>
         </div>
 
-        {/* IMAGE PREVIEW (Fixed Height) */}
+        {/* IMAGE PREVIEW */}
         <div className="relative h-32 shrink-0 bg-black">
           <img src={project.banner} alt="" className="w-full h-full object-cover opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#030712] to-transparent" />
@@ -52,7 +52,7 @@ const ProjectCard = React.memo(({ project, isActive }) => {
           </div>
         </div>
 
-        {/* CONTENT AREA (Properly Fitted) */}
+        {/* CONTENT AREA */}
         <div className="p-5 flex flex-col flex-grow overflow-hidden">
           <div className="mb-2">
             <GradientText
@@ -64,21 +64,32 @@ const ProjectCard = React.memo(({ project, isActive }) => {
           </div>
           
           <p className="text-[9px] font-mono font-black text-cyan-500/80 mb-3 tracking-widest uppercase">
-            STATUS_ONLINE
+            {project.status ? `STATUS_${project.status}` : 'STATUS_ONLINE'}
           </p>
 
           <p className="text-[12px] text-slate-300 leading-snug line-clamp-3 mb-4 font-medium">
              {project.shortDesc || project.blogContent.overview}
           </p>
           
-          {/* TECH STACK WITH COLORFUL ACCENTS */}
+          {/* DYNAMIC TECH STACK WITH COLORFUL ACCENTS */}
           <div className="flex flex-wrap gap-2 mb-4">
-            {['React', 'Node', 'Tailwind'].map((tech) => (
-              <div key={tech} className="flex items-center gap-1.5 px-2.5 py-1 bg-white/5 border border-white/10 rounded-md">
-                <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.color }} />
-                <span className="text-[10px] font-bold text-white uppercase tracking-tighter">{tech}</span>
-              </div>
-            ))}
+            {project.techStack.map((tech, index) => {
+              const techName = typeof tech === 'string' ? tech : tech.name;
+              const techIcon = typeof tech === 'object' ? tech.icon : null;
+
+              return (
+                <div key={index} className="flex items-center gap-1.5 px-2.5 py-1 bg-white/5 border border-white/10 rounded-md">
+                  {techIcon ? (
+                    <img src={techIcon} alt="" className="w-3 h-3 object-contain" />
+                  ) : (
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.color }} />
+                  )}
+                  <span className="text-[10px] font-bold text-white uppercase tracking-tighter">
+                    {techName}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           {/* ACTION BUTTON */}
@@ -115,12 +126,18 @@ const ProjectMatrix = () => {
   return (
     <div className="w-full py-8 px-4 overflow-hidden relative group bg-[#010409]">
       
-      {/* ARROW BUTTONS (Restored & Sharp) */}
-      <button ref={prevRef} className="absolute left-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex">
+      {/* ARROW BUTTONS */}
+      <button 
+        ref={prevRef} 
+        className="absolute left-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex"
+      >
         <ChevronLeft size={28} />
       </button>
       
-      <button ref={nextRef} className="absolute right-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex">
+      <button 
+        ref={nextRef} 
+        className="absolute right-10 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-black/80 border border-white/20 text-white/40 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer hidden md:flex"
+      >
         <ChevronRight size={28} />
       </button>
 
@@ -137,6 +154,7 @@ const ProjectMatrix = () => {
         }}
         coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 2, slideShadows: false }}
         pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
         className="project-swiper !pb-16"
       >

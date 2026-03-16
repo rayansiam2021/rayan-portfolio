@@ -1,11 +1,11 @@
 export const projectsData = [
   {
-    id: "satsport-exchange", // This MUST match the URL: /project/satsport-exchange
-    title: "satsport-exchange",
+    id: "satsport-exchange",
+    title: "SatSport-Exchange",
     category: "Web Development",
     shortDesc: "A high-performance sports betting exchange platform with real-time API integration.",
     banner: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
-    techStack: ["Angular", "FastAPI", "API"],
+    techStack: ["Angular", "FastAPI", "Python", "API"],
     status: "DEPLOYED",
     color: "#00f2ff",
     colorArray: ["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"],
@@ -16,6 +16,35 @@ export const projectsData = [
       results: "Successfully launched with 99.9% uptime for live cricket and football markets."
     }
   },
+  {
+  id: "ai-plagiarism-detection-system",
+  title: "AI & Plagiarism Detection System",
+  category: "Full-Stack AI & Engineering",
+  shortDesc: "A dual-engine security suite providing forensic-level analysis of AI-generated content and web-based plagiarism.",
+  banner: "/assets/projects/plagiarism-detector-bg.jpg",
+  techStack: [
+    { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "HuggingFace", icon: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
+    { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+    { name: "Google API", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" }
+  ],
+  status: "STATUS_STABLE",
+  color: "#6366f1",
+  date: "March 2026",
+  blogContent: {
+    overview: "Engineered a high-integrity document validation system. The platform executes parallel processing workflows: one branch leverages HuggingFace Transformer models for AI-content probability, while the other utilizes Google Search API for global web-plagiarism indexing.",
+    challenge: "Optimizing the asynchronous execution of API calls and machine learning inference. I architected a non-blocking backend to ensure sub-3-second processing times for large document uploads without server latency.",
+    results: "Delivered a production-ready forensic reporting engine. The system automatically generates comprehensive .docx audits, featuring precision text-highlighting and actionable writing improvements for academic development.",
+    // Corrected path based on your VS Code sidebar
+    projectimg: "/assets/projectimg/ai-plagiarism-architecture.png" 
+  },
+  links: {
+    github: "https://github.com/rayansiam2021/A-plagiarism-and-web-content-detection-system",
+    // Matches your actual folder structure in public/assets/docs/
+    report: "/assets/docs/ai-plagiarism-report-221.docx"
+  }
+},
   {
     id: "iot-smart-car",
     title: "IoT Smart Car",
@@ -49,27 +78,10 @@ export const projectsData = [
       challenge: "Optimizing the store for high traffic surges from social media marketing.",
       results: "Built a conversion-ready architecture that sustained 35% monthly growth."
     }
-  },
-  {
-    id: "ai-content-guard",
-    title: "AI Content Guard",
-    category: "Full-Stack AI",
-    shortDesc: "Enterprise-grade plagiarism and AI detection system using custom Python models.",
-    banner: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
-    techStack: ["FastAPI", "Python", "React"],
-    status: "STABLE",
-    color: "#ef4444",
-    colorArray: ["#ef4444", "#ffffff", "#fee2e2", "#b91c1c", "#ef4444"],
-    date: "March 2026",
-    blogContent: {
-      overview: "A sophisticated tool designed to distinguish between human and machine-generated text.",
-      challenge: "Reducing false positives in academic contexts where technical language is common.",
-      results: "Reached 94% detection accuracy across diverse document types."
-    }
   }
 ];
 
-// Helper to fill up to 16 items for your Grid
+// 12-item filling loop for UI testing
 for (let i = 5; i <= 16; i++) {
   projectsData.push({
     id: `project-ref-${i}`,
