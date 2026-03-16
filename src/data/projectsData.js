@@ -46,22 +46,35 @@ export const projectsData = [
   }
 },
   {
-    id: "iot-smart-car",
-    title: "IoT Smart Car",
-    category: "Embedded Systems",
-    shortDesc: "Autonomous vehicle prototype featuring obstacle avoidance and real-time sensor processing.",
-    banner: "https://images.unsplash.com/photo-1511818471343-70e248b11a91?auto=format&fit=crop&q=80&w=1200",
-    techStack: ["C++", "Arduino", "Sensors"],
-    status: "PROTOTYPE",
-    color: "#fb923c",
-    colorArray: ["#fb923c", "#ffffff", "#ffedd5", "#f97316", "#fb923c"],
-    date: "Jan 2026",
-    blogContent: {
-      overview: "An autonomous prototype utilizing ultrasonic sensors for spatial awareness.",
-      challenge: "Synchronizing sensor feedback with motor controller latency for smooth stopping.",
-      results: "Achieved 100% successful navigation in obstacle-heavy environments."
-    }
+  id: "iot-obstacle-avoiding-robot",
+  title: "IoT Obstacle Avoiding Car",
+  category: "Robotics & Embedded Systems",
+  shortDesc: "An autonomous terrestrial vehicle engineered with ultrasonic spatial awareness and real-time decision-making logic.",
+  banner: "/assets/projects/robot-bg.jpg",
+  techStack: [
+    { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "Arduino", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
+    { name: "L293D Shield", icon: "https://img.icons8.com/color/48/pci-card.png" }, 
+    { name: "Ultrasonic", icon: "https://img.icons8.com/color/48/radar.png" },
+    { name: "Servo Motor", icon: "https://img.icons8.com/color/48/engine.png" },
+    { name: "Embedded", icon: "https://img.icons8.com/color/48/integrated-circuit.png" },
+    { name: "IoT", icon: "https://img.icons8.com/color/48/internet-of-things.png" }
+  ],
+  status: "STATUS_VERIFIED",
+  color: "#3b82f6", 
+  date: "October 2025",
+  blogContent: {
+    overview: "Developed a fully autonomous robotic system utilizing ultrasonic sensing and servo-actuated scanning for real-time environment mapping. The complete project source—including the C++ firmware and circuit schematics—is archived in a ZIP file on GitHub for full engineering transparency.",
+    challenge: "Managing power-to-torque ratios while optimizing the 'Scan and React' loop. I implemented a hierarchical logic system in C++ that compares lateral distances (lookRight vs lookLeft) to determine the optimal path of least resistance, ensuring collision avoidance at various speeds.",
+    results: "Achieved a stable autonomous platform with a detection range of 200cm and a neutral scanning alignment of 115 degrees. The system utilizes software-level speed ramping to prevent voltage spikes, ensuring the longevity of the L293D motor shield and internal circuitry.",
+    projectimg: "/assets/projectimg/robot-circuitry.png" 
   },
+  links: {
+    github: "https://github.com/rayansiam2021/IOT/blob/main/221-16-641_Rayan%20Ahmed_IOT%20ALL.zip",
+    report: "/assets/docs/221-16-641_Rayan_IOT.docx" 
+  }
+},
+
   {
     id: "multi-drop-fusion",
     title: "Multi Drop Fusion",

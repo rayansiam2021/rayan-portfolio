@@ -30,7 +30,7 @@ const Home = ({ data }) => {
         <section id="capabilities" className="py-32 px-4" style={{ contentVisibility: 'auto' }}>
           <div className="max-w-5xl mx-auto">
             <header className="text-center mb-16">
-              <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">System_Capabilities</h2>
+              <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">I AM EXPERIENCED IN </h2>
               <div className="h-[1px] w-32 bg-cyan-500/50 mx-auto mt-4" />
             </header>
 
@@ -45,7 +45,7 @@ const Home = ({ data }) => {
         <section id="archive" className="py-32 px-4 border-t border-white/5 bg-[#030712]/20" style={{ contentVisibility: 'auto' }}>
           <div className="max-w-7xl mx-auto">
             <header className="text-center mb-20">
-              <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">Deployment_Matrix</h2>
+              <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">LISTED PROJECT FROM ALL</h2>
               <div className="h-[1px] w-40 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mx-auto mt-4" />
             </header>
             
