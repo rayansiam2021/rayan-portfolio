@@ -25,7 +25,6 @@ const NavLink = memo(({ link, index, setIsOpen }) => (
     onClick={() => setIsOpen(false)}
     className={`group relative flex items-center justify-between p-7 rounded-[2rem] border border-white/10 bg-[#0a0f24]/50 transition-all duration-300 hover:bg-[#0f173a] hover:border-white/20 hover:-translate-y-1 transform-gpu overflow-hidden`}
   >
-    {/* Animated Hover Background Beam */}
     <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-r ${link.gradient}`} />
     
     <div className="flex items-center gap-6 relative z-10">
@@ -75,14 +74,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ULTRA-SMOOTH OVERLAY */}
       <div className={`fixed inset-0 z-[95] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="absolute inset-0 bg-[#020617] lg:bg-[#020617]/98" onClick={() => setIsOpen(false)} />
         
         <div className="relative h-full overflow-y-auto pt-32 pb-16 px-6 sm:px-12">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-stretch h-full">
             
-            {/* LEFT SIDE: NAVIGATION */}
             <div className="w-full lg:w-1/2 flex flex-col gap-5">
               <div className="flex items-center gap-3 mb-2 px-2">
                 <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
@@ -93,23 +90,20 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* RIGHT SIDE: PREMIUM DOSSIER CARD */}
             <div className="w-full lg:w-1/2">
               <div className="relative h-full p-[2px] rounded-[3.5rem] bg-gradient-to-br from-cyan-500/40 via-transparent to-purple-600/40 shadow-2xl">
                 <div className="h-full p-10 md:p-14 rounded-[3.4rem] bg-[#080c1d] border border-white/5 relative overflow-hidden group/dossier">
                   
-                  {/* Decorative Grid Background */}
                   <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#2dd4bf_1px,transparent_1px)] [background-size:24px_24px]" />
 
-                  {/* Header Section */}
-                  <div className="relative z-10 mb-12">
+                  <div className="relative z-10 mb-10">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[10px] font-mono font-black text-cyan-400">
                         LIFESIGN: ACTIVE
                       </div>
                       <div className="h-[1px] flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent" />
                     </div>
-                    <h2 className="text-6xl font-black text-white italic tracking-tighter mb-4 group-hover/dossier:text-cyan-400 transition-colors duration-500">
+                    <h2 className="text-6xl font-black text-white italic tracking-tighter mb-4">
                       Rayan Ahmed
                     </h2>
                     <p className="text-base font-mono text-slate-400 tracking-wider uppercase">
@@ -117,57 +111,57 @@ const Navbar = () => {
                     </p>
                   </div>
 
-                  {/* HIGH-VIBRANCY TECH STACK */}
-                  <div className="relative z-10 space-y-5 mb-14">
-                    <div className="grid grid-cols-1 gap-4">
-                      {/* FRONTEND */}
-                      <div className="group/tech p-5 rounded-[1.5rem] bg-white/5 border border-white/5 hover:border-cyan-500/50 transition-all">
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover/tech:scale-110 transition-transform"><Code2 size={24} /></div>
-                          <div>
-                            <p className="text-[10px] font-mono text-slate-500 font-bold uppercase mb-1">Frontend_Module</p>
-                            <p className="text-sm font-black text-white tracking-tight uppercase">HTML CSS JS • <span className="text-cyan-400">React Tailwind Bootstrap</span></p>
-                          </div>
-                        </div>
+                  {/* REFINED TECH STACK */}
+                  <div className="relative z-10 space-y-4 mb-12">
+                    {/* FRONTEND */}
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-cyan-500/50 transition-all">
+                      <div className="flex items-center gap-4">
+                        <Code2 size={22} className="text-cyan-400" />
+                        <span className="text-sm font-black text-white uppercase tracking-tight">HTML CSS JS • <span className="text-cyan-400">Bootstrap Tailwind React</span></span>
                       </div>
+                    </div>
 
-                      {/* BACKEND */}
-                      <div className="group/tech p-5 rounded-[1.5rem] bg-white/5 border border-white/5 hover:border-emerald-500/50 transition-all">
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover/tech:scale-110 transition-transform"><Zap size={24} /></div>
-                          <div>
-                            <p className="text-[10px] font-mono text-slate-500 font-bold uppercase mb-1">Core_Engine</p>
-                            <p className="text-sm font-black text-white tracking-tight uppercase">Python <span className="text-emerald-400">FastAPI</span> • PHP • MySQL <span className="text-blue-400">SQLite</span></p>
-                          </div>
-                        </div>
+                    {/* BACKEND & DB */}
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-emerald-500/50 transition-all">
+                      <div className="flex items-center gap-4">
+                        <Zap size={22} className="text-emerald-400" />
+                        <span className="text-sm font-black text-white uppercase tracking-tight">Python <span className="text-emerald-400">FastAPI</span> • PHP • MySQL <span className="text-blue-400">SQLite</span></span>
                       </div>
+                    </div>
 
-                      {/* HARDWARE */}
-                      <div className="group/tech p-5 rounded-[1.5rem] bg-white/5 border border-white/5 hover:border-purple-500/50 transition-all">
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 rounded-xl bg-purple-500/10 text-purple-400 group-hover/tech:scale-110 transition-transform"><Cpu size={24} /></div>
-                          <div>
-                            <p className="text-[10px] font-mono text-slate-500 font-bold uppercase mb-1">Embedded_Logic</p>
-                            <p className="text-sm font-black text-white tracking-tight uppercase">ESP32 • Arduino C++ • <span className="text-purple-400">Sensor Systems</span></p>
-                          </div>
+                    {/* CMS */}
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-amber-500/50 transition-all">
+                      <div className="flex items-center gap-4">
+                        <Globe size={22} className="text-amber-400" />
+                        <span className="text-sm font-black text-white uppercase tracking-tight">WordPress <span className="text-slate-600">|</span> <span className="text-amber-400">Shopify</span></span>
+                      </div>
+                    </div>
+
+                    {/* MICROCONTROLLER */}
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/50 transition-all">
+                      <div className="flex items-start gap-4">
+                        <Cpu size={22} className="text-purple-400 mt-1" />
+                        <div>
+                          <p className="text-[10px] font-mono text-purple-400 font-black uppercase mb-0.5">Hardware_Logic</p>
+                          <p className="text-sm font-black text-white uppercase tracking-tight leading-tight">
+                            ESP32 • Arduino C++ • Sensor Integration & Microcontroller Programming
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* PREMIUM FOOTER SOCIALS */}
-                  <div className="relative z-10 pt-10 border-t border-white/10 flex justify-center gap-5 flex-wrap">
-                    <IconButton href="#" icon={<Linkedin size={24} />} color="text-blue-400" />
-                    <IconButton href="https://github.com/rayansiam2021" icon={<Github size={24} />} color="text-white" />
-                    <IconButton href="#" icon={<Briefcase size={24} />} color="text-emerald-400" /> 
-                    <IconButton href="#" icon={<Facebook size={24} />} color="text-cyan-500" />
-                    <IconButton href="#" icon={<Instagram size={24} />} color="text-pink-500" />
+                  <div className="relative z-10 pt-8 border-t border-white/10 flex justify-center gap-4 flex-wrap">
+                    <IconButton href="#" icon={<Linkedin size={22} />} color="text-blue-400" />
+                    <IconButton href="https://github.com/rayansiam2021" icon={<Github size={22} />} color="text-white" />
+                    <IconButton href="#" icon={<Briefcase size={22} />} color="text-emerald-400" /> 
+                    <IconButton href="#" icon={<Facebook size={22} />} color="text-cyan-500" />
+                    <IconButton href="#" icon={<Instagram size={22} />} color="text-pink-500" />
                   </div>
 
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
