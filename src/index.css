@@ -7,69 +7,160 @@
   --animate-snake: snake-spin 4s linear infinite;
 }
 
-/* --- THE ENGINE: HARDWARE ACCELERATION --- */
+/* --- 1. CORE ENGINE: HARDWARE ACCELERATION --- */
 * {
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
+  touch-action: manipulation; 
 }
 
 html {
   scroll-behavior: smooth;
   background-color: #020617;
-  /* Prevent scroll chaining lag */
   overscroll-behavior-y: none; 
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Force hardware layers for main sections */
-section, .skill-terminal, .service-engine, .project-swiper {
-  transform: translate3d(0,0,0);
+/* --- 2. LAYER PROMOTION & COMPOSITING --- */
+section, 
+.HeroContainer_wrapper, 
+.StatsRibbon_wrapper,
+.project-swiper,
+.profile-card-body,
+.profile-container {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
   will-change: transform;
-  contain: paint;
+  contain: layout paint;
 }
 
-/* --- THE MOTION DEFINITIONS --- */
+.preserve-3d { 
+  transform-style: preserve-3d; 
+}
+
+/* --- 3. ANIMATION KEYFRAMES --- */
 @keyframes snake-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
+@keyframes border-flow {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes profile-float {
+  0%, 100% { transform: translateZ(80px) translateY(0px); }
+  50% { transform: translateZ(100px) translateY(-8px); }
+}
+
+/* --- 4. GLOBAL CLASSES --- */
 .animate-snake {
   animation: snake-spin 4s linear infinite;
-  animation-composition: replace;
-  /* Crucial for mobile: prevents the browser from dropping the animation thread */
-  -webkit-transform-style: preserve-3d;
+  transform: translateZ(0);
 }
 
-/* --- THE BORDER GLOW --- */
-[style*="conic-gradient"] {
-  will-change: transform;
-  /* Double shadow is a performance killer on mobile. Let's optimize. */
-  filter: drop-shadow(0 0 8px currentColor);
+.profile-border-flow {
+  animation: border-flow 4s linear infinite;
+  filter: drop-shadow(0 0 12px #00f2ff);
 }
 
-/* --- MOBILE "TURBO" PERFORMANCE OVERRIDES --- */
-@media (max-width: 768px) {
-  /* 1. Simplify shadows for mobile GPU */
-  [style*="conic-gradient"] {
-    filter: none !important; /* Shadows during rotation = mobile lag */
-    box-shadow: inset 0 0 10px currentColor; /* Faster to render than drop-shadow */
+/* --- 5. DESKTOP-ONLY ENHANCEMENTS (Min 1024px) --- */
+@media (min-width: 1024px) {
+  .profile-layer-hero { 
+    transform: translateZ(100px); 
+    animation: profile-float 6s ease-in-out infinite;
   }
+  .profile-layer-text { transform: translateZ(60px); }
+  .profile-layer-base { transform: translateZ(30px); }
+  
+  [style*="conic-gradient"] {
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+}
 
-  /* 2. Kill backdrop-filter - This is 90% of your current lag */
-  .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-lg {
+/* --- 6. MOBILE "TURBO" PERFORMANCE (Max 1023px) --- */
+@media (max-width: 1023px) {
+  /* Kill Backdrop-Blur & Heavy Shadows */
+  .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-lg, .backdrop-blur-md {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background-color: #0b1222 !important; /* Solid color is free to render */
+    background-color: rgba(11, 18, 34, 0.98) !important; 
   }
 
-  /* 3. Reduce animation complexity */
-  .animate-snake {
-    animation-duration: 6s; /* Slower = easier for mobile compositor */
+  [style*="conic-gradient"], .shadow-2xl, .profile-border-flow {
+    filter: none !important; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  }
+
+  /* Flatten 3D transforms to stop scroll jitter */
+  .profile-layer-hero, 
+  .profile-layer-text, 
+  .profile-layer-base { 
+    transform: translateZ(0) !important; 
+    animation: none !important;
+  }
+
+  .perspective-\[1500px\], .profile-container {
+    perspective: none !important;
   }
 }
 
-/* Swiper Smoothness */
-:global(.swiper-wrapper) {
+/* --- 7. EXTERNAL LIBRARY OPTIMIZATION --- */
+.swiper-wrapper {
   will-change: transform;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1) !important;
+}
+
+.swiper-slide {
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Ensure buttons don't have that "blue highlight" box on mobile tap */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Optional: Add a subtle glow to the primary button on hover */
+.action-btn-glow {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+/* --- HOVER PERFORMANCE OPTIMIZATIONS --- */
+
+/* --- MOBILE PERFORMANCE ENGINE --- */
+
+.transform-gpu {
+  /* Forces the element onto its own GPU layer */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Fixes the 'Sticky' Hover on Mobile 
+   (Ensures the hover state clears after the tap) */
+@media (hover: none) {
+  .group:active {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: none; /* Instant feedback on mobile tap */
+  }
+}
+
+/* Optimization: Tell the browser these won't change layout */
+.SpecialtyCard_wrapper {
+  contain: content;
+}
+
+/* Prevent text selection while tapping cards on mobile */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
 }
