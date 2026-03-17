@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Terminal, Cpu, Globe, Database, Layers, 
-  Code2, Zap, ShoppingCart, Settings2, Boxes, Share2
+  Code2, Zap, ShoppingCart, Settings2, Boxes, Share2 
 } from 'lucide-react';
-import ElectricBorder from './bits/ElectricBorder';
 
 const SkillTerminal = () => {
   const [activeTab, setActiveTab] = useState('frontend');
 
-  const skillData = {
+  const skillData = useMemo(() => ({
     frontend: [
       { name: "React + Vite", label: "MODERN_SPA", icon: <Boxes size={18} className="text-cyan-400" /> },
       { name: "HTML5 & CSS3", label: "STRUCTURE", icon: <Code2 size={18} className="text-orange-400" /> },
@@ -38,83 +37,99 @@ const SkillTerminal = () => {
       { name: "XAMPP", label: "LOCAL_SERVER", icon: <Settings2 size={18} className="text-blue-400" /> },
       { name: "Web Hosting", label: "DEPLOYMENT", icon: <Globe size={18} className="text-cyan-500" /> },
     ]
-  };
+  }), []);
 
   return (
-    <div className="mt-8 w-full max-w-3xl mx-auto font-mono relative">
-      <ElectricBorder color="#00f2ff" chaos={0.05} speed={1} borderRadius={20}>
-        <div className="bg-[#0b1222] rounded-[20px] overflow-hidden border border-slate-800 shadow-2xl relative">
-          
-          {/* Header Bar */}
-          <div className="bg-slate-800/80 px-5 py-4 flex items-center justify-between border-b border-slate-700/50 relative z-10">
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-              </div>
-              <div className="h-4 w-[1px] bg-slate-700 mx-1"></div>
-              <Terminal size={14} className="text-slate-400" />
-              <span className="text-[10px] font-black text-slate-400 tracking-[0.2em] uppercase">
-                RAYAN_SKILL_ARCHIVE // V2.0
-              </span>
-            </div>
-          </div>
+    <div className="mt-16 w-full max-w-4xl mx-auto font-mono relative p-[2px] rounded-[24px] overflow-hidden group">
+      {/* 🔮 LOCAL CSS INJECTION TO PREVENT STUCK ANIMATION */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes force-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .snake-spinning-layer {
+          animation: force-spin 4s linear infinite !important;
+        }
+      `}} />
+      
+      {/* ⚡ THE SPINNING SNAKE */}
+      <div 
+        className="absolute inset-[-250%] snake-spinning-layer pointer-events-none"
+        style={{ 
+          background: `conic-gradient(from 0deg, transparent 70%, #00f2ff 85%, #fff 95%, #00f2ff 100%)`,
+          willChange: 'transform',
+          zIndex: 0
+        }}
+      />
 
-          {/* Navigation */}
-          <div className="flex bg-slate-900/40 border-b border-slate-800 relative z-[100] flex-wrap">
-            {Object.keys(skillData).map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab(tab);
-                }}
-                className={`flex-1 min-w-[100px] py-4 text-[10px] font-black uppercase tracking-widest transition-all relative cursor-pointer pointer-events-auto ${
-                  activeTab === tab 
-                  ? 'text-white bg-cyan-500/10' 
-                  : 'text-slate-500 hover:text-slate-300'
-                }`}
+      {/* TERMINAL CONTENT */}
+      <div className="relative bg-[#0b1222]/98 backdrop-blur-2xl rounded-[22px] overflow-hidden z-10 shadow-2xl border border-white/5">
+        
+        {/* Top Header Bar */}
+        <div className="bg-slate-800/40 px-6 py-4 flex items-center justify-between border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+            </div>
+            <div className="h-4 w-[1px] bg-white/10 mx-1" />
+            <Terminal size={14} className="text-cyan-400/70" />
+            <span className="text-[10px] font-black text-slate-400 tracking-[0.3em] uppercase">
+              RAYAN_SKILL_ARCHIVE // V2.2
+            </span>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex bg-slate-900/60 border-b border-white/5 flex-wrap">
+          {Object.keys(skillData).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 min-w-[120px] py-4 text-[10px] font-black uppercase tracking-widest transition-all relative ${
+                activeTab === tab 
+                ? 'text-cyan-400 bg-cyan-500/5' 
+                : 'text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              {tab.replace('_', ' ')}
+              {activeTab === tab && (
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-400 shadow-[0_0_15px_#00f2ff]" />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid Body */}
+        <div className="p-8 min-h-[360px] bg-black/20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {skillData[activeTab].map((skill, index) => (
+              <div 
+                key={index} 
+                className="group/item flex items-center justify-between p-5 bg-white/[0.03] border border-white/5 rounded-2xl transition-all duration-300 hover:bg-white/[0.07] hover:border-cyan-500/30 hover:-translate-y-1"
               >
-                {tab.replace('_', ' ')}
-                {activeTab === tab && (
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-400 shadow-[0_0_10px_#00f2ff]"></div>
-                )}
-              </button>
+                <div className="flex items-center gap-5">
+                  <div className="p-2 bg-slate-900/50 rounded-lg group-hover/item:scale-110 transition-transform">
+                    {skill.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-bold tracking-tight">{skill.name}</h4>
+                    <p className="text-[9px] font-black text-slate-500 uppercase mt-0.5">{skill.label}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Terminal Body */}
-          <div className="p-8 min-h-[320px] bg-black/40 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {skillData[activeTab].map((skill, index) => (
-                <div 
-                  key={index} 
-                  className="group flex items-center justify-between p-4 bg-slate-800/20 border border-slate-700/30 rounded-xl hover:border-cyan-500/40 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-4">
-                    {skill.icon}
-                    <span className="text-white text-sm font-bold">{skill.name}</span>
-                  </div>
-                  <span className="text-[9px] font-black text-slate-500 uppercase">{skill.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer Prompt */}
-            <div className="mt-12 flex items-center gap-3 border-t border-slate-800/50 pt-6">
-              <span className="text-cyan-500 font-bold text-sm">rayan@dev:~$</span>
-              <span className="text-slate-400 text-sm font-mono tracking-tight">fetch --skills --detailed</span>
-              <span className="w-2 h-5 bg-cyan-400 animate-pulse"></span>
-            </div>
-          </div>
-
-          {/* Overlays */}
-          <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
+          {/* Footer CLI Prompt */}
+          <div className="mt-12 flex items-center gap-3 border-t border-white/5 pt-8">
+            <span className="text-cyan-500 font-bold text-sm">rayan@dev:~$</span>
+            <span className="text-slate-400 text-sm font-mono tracking-tight">fetch --skills --detailed</span>
+            <span className="w-2.5 h-6 bg-cyan-400 animate-pulse shadow-[0_0_10px_#00f2ff]" />
           </div>
         </div>
-      </ElectricBorder>
+      </div>
     </div>
   );
 };
