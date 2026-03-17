@@ -1,46 +1,30 @@
 @import "tailwindcss";
-
 @source "../src";
 
 @theme {
   --color-background: #020617;
   --color-foreground: #cbd5e1;
-  --animate-spin-slow: snake-spin 4s linear infinite;
+  --animate-snake: snake-spin 4s linear infinite;
 }
 
-/* --- THE ENGINE: ULTRA SMOOTH GLOBAL FIXES --- */
+/* --- THE ENGINE: HARDWARE ACCELERATION --- */
 * {
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  overscroll-behavior-y: none;
   background-color: #020617;
+  /* Prevent scroll chaining lag */
+  overscroll-behavior-y: none; 
 }
 
-body {
-  margin: 0;
-  color: #cbd5e1;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Force Hardware Acceleration on Layout Sections */
-section {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  contain: paint; /* Massive FPS boost: browser ignores what's outside the box */
-}
-
-/* --- GPU OPTIMIZATION CLASSES --- */
-.smooth-gpu-layer {
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-  perspective: 1000px;
+/* Force hardware layers for main sections */
+section, .skill-terminal, .service-engine, .project-swiper {
+  transform: translate3d(0,0,0);
   will-change: transform;
+  contain: paint;
 }
 
 /* --- THE MOTION DEFINITIONS --- */
@@ -50,54 +34,42 @@ section {
 }
 
 .animate-snake {
-  animation: snake-spin 4s linear infinite !important;
-  will-change: transform;
-  animation-composition: replace; 
+  animation: snake-spin 4s linear infinite;
+  animation-composition: replace;
+  /* Crucial for mobile: prevents the browser from dropping the animation thread */
+  -webkit-transform-style: preserve-3d;
 }
 
-@keyframes scan {
-  0% { top: 0%; opacity: 0; }
-  50% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-
-.animate-scan {
-  position: absolute;
-  animation: scan 3s linear infinite;
-}
-
-/* --- BORDER GLOW ENGINE --- */
+/* --- THE BORDER GLOW --- */
 [style*="conic-gradient"] {
   will-change: transform;
-  transform: translateZ(0);
-  /* Electric Glow Stack */
-  filter: 
-    drop-shadow(0 0 5px currentColor) 
-    drop-shadow(0 0 12px currentColor);
+  /* Double shadow is a performance killer on mobile. Let's optimize. */
+  filter: drop-shadow(0 0 8px currentColor);
 }
 
-/* --- SWIPER / PROJECT MATRIX CUSTOMS --- */
+/* --- MOBILE "TURBO" PERFORMANCE OVERRIDES --- */
+@media (max-width: 768px) {
+  /* 1. Simplify shadows for mobile GPU */
+  [style*="conic-gradient"] {
+    filter: none !important; /* Shadows during rotation = mobile lag */
+    box-shadow: inset 0 0 10px currentColor; /* Faster to render than drop-shadow */
+  }
+
+  /* 2. Kill backdrop-filter - This is 90% of your current lag */
+  .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-lg {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #0b1222 !important; /* Solid color is free to render */
+  }
+
+  /* 3. Reduce animation complexity */
+  .animate-snake {
+    animation-duration: 6s; /* Slower = easier for mobile compositor */
+  }
+}
+
+/* Swiper Smoothness */
 :global(.swiper-wrapper) {
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1) !important;
   will-change: transform;
-}
-
-.swiper-pagination-bullet {
-  background: #334155 !important;
-  opacity: 1 !important;
-  transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-  background: #06b6d4 !important;
-  width: 20px !important;
-  border-radius: 4px !important;
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
-}
-
-/* --- COMPONENT SPECIFIC CONTAINMENT --- */
-.project-matrix, .skill-terminal, .service-engine {
-  contain: paint;
-  content-visibility: auto; /* CPU ignores these when they are scrolled off-screen */
-  transform: translateZ(0);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
 }

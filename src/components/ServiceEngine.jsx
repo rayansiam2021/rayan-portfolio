@@ -31,35 +31,35 @@ const services = [
 
 const ServiceCard = ({ service }) => {
   return (
-    <div className="group relative p-[2px] rounded-[24px] overflow-hidden transition-all duration-500 hover:-translate-y-2 transform-gpu shadow-2xl">
+    <div className="group relative p-[2px] rounded-[24px] overflow-hidden smooth-gpu-layer h-full">
       
-      {/* ALWAYS ACTIVE SPINNING BORDER */}
+      {/* ⚡ THE SPINNING SNAKE - Reduced Inset for Mobile RAM */}
       <div 
-        className="absolute inset-[-150%] animate-[spin_4s_linear_infinite] opacity-100"
+        className="absolute inset-[-150%] animate-snake pointer-events-none z-0"
         style={{ 
           background: `conic-gradient(from 0deg, transparent 70%, ${service.color} 88%, #fff 96%, ${service.color} 100%)`,
-          filter: 'blur(1px)' // Makes the "Snake" look more electric
+          WebkitBackfaceVisibility: 'hidden'
         }}
       />
 
       {/* INNER CONTENT CONTAINER */}
-      <div className="relative bg-[#030712] p-8 h-full rounded-[23px] flex flex-col z-10 overflow-hidden">
+      <div className="relative bg-[#030712] p-8 h-full rounded-[23px] flex flex-col z-10 overflow-hidden mobile-optimized-bg">
         
-        {/* HOVER EFFECT: Internal Bloom/Glow */}
+        {/* HOVER EFFECT: Desktop-only Bloom (to prevent scroll lag) */}
         <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"
+          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none hidden md:block"
           style={{ backgroundColor: service.color, filter: 'blur(60px)' }}
         />
 
-        {/* Icon with Hover-Triggered Bloom */}
+        {/* Icon with Performance-Safe Bloom */}
         <div 
-          className="mb-6 inline-block p-4 bg-white/5 rounded-2xl group-hover:scale-110 transition-all duration-500 w-fit relative"
+          className="mb-6 inline-block p-4 bg-white/5 rounded-2xl transition-all duration-500 w-fit relative"
           style={{ color: service.color }}
         >
-          {/* Internal Glow behind icon - Only pops on hover */}
-          <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 rounded-full" 
+          {/* Internal Glow - Only triggers on Desktop hover */}
+          <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 rounded-full hidden md:block" 
                style={{ backgroundColor: service.color }} />
-          <div className="relative z-10">{service.icon}</div>
+          <div className="relative z-10 group-hover:scale-110 transition-transform duration-500">{service.icon}</div>
         </div>
         
         <div className="mb-1">
@@ -92,19 +92,21 @@ const ServiceCard = ({ service }) => {
 
 const ServiceEngine = () => {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-32">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <section className="max-w-6xl mx-auto px-4 py-20 md:py-32 service-engine-card-container">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
         {services.map((service, index) => (
           <ServiceCard key={index} service={service} />
         ))}
       </div>
 
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 768px) {
+          .mobile-optimized-bg {
+            backdrop-filter: none !important;
+            background-color: #030712 !important;
+          }
         }
-      `}</style>
+      `}} />
     </section>
   );
 };
