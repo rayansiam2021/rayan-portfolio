@@ -72,7 +72,7 @@ const ProfileCard = () => {
                <div className="h-[1px] w-6 bg-cyan-500/50" />
                <p className="text-cyan-400 font-mono text-[10px] uppercase tracking-[0.4em] font-bold">
                  "Engineering Scalable
-Web & IoT Solutions."
+Web Applications & IoT Solutions."
                </p>
                <div className="h-[1px] w-6 bg-cyan-500/50" />
             </div>
