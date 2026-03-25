@@ -3,31 +3,8 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  /* Remove center align so Swiper calculates coordinates from 0,0 */
+  /* Clean slate for our new Matrix Grid */
   text-align: left !important; 
-}
-
-/* --- PROJECT MATRIX SWIPER HACKS --- */
-.project-swiper {
-  width: 100%;
-  padding: 20px 0 60px 0 !important;
-  /* IMPORTANT: Stops the "sticky" vertical scroll while swiping */
-  touch-action: pan-y !important; 
-  cursor: grab;
-}
-
-.project-swiper:active {
-  cursor: grabbing;
-}
-
-/* Force GPU for every slide */
-.swiper-slide {
-  height: auto;
-  will-change: transform;
-  transform: translateZ(0);
-  /* Prevents image flickering during swipe */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 /* --- MOBILE OPTIMIZATION --- */
@@ -37,7 +14,7 @@
     overflow-x: hidden;
   }
   
-  /* Disable the default Vite logo animations to save CPU */
+  /* Disable any legacy logo animations to save CPU */
   .logo {
     animation: none !important;
     filter: none !important;
@@ -46,7 +23,33 @@
 
 /* --- GLOBAL SCROLL FIX --- */
 html, body {
+  /* Prevent horizontal "wobble" on mobile */
   overflow-x: hidden;
   width: 100%;
   background-color: #020617;
+  scroll-behavior: smooth;
+}
+
+/* --- UTILITY: GPU ACCELERATION --- */
+/* Apply this to cards to ensure smooth scrolling on mobile */
+.smooth-gpu-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+/* Custom Scrollbar for the Archive Grid */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
 }

@@ -1,186 +1,214 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { projectsData } from '../data/projectsData';
-import { Terminal, Cpu, Trophy, ArrowLeft, Globe, Github, FileText, Download } from 'lucide-react';
+import { 
+  ArrowLeft, ExternalLink, FileText, Github, 
+  Cpu, Layout, CheckCircle2, AlertCircle, Terminal 
+} from 'lucide-react';
 
 const Project = () => {
   const { projectId } = useParams();
+  const project = projectsData.find(p => p.id === projectId);
+
+  // Define Accent Color based on Category
+  const accentColor = (() => {
+    if (!project) return '#22d3ee';
+    switch (project.category) {
+      case 'Coded Web Solutions': return '#22d3ee'; // Cyan
+      case 'IOT': return '#fb923c';               // Orange
+      case 'Wordpress': return '#a855f7';          // Purple
+      default: return '#34d399';                  // Emerald
+    }
+  })();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [projectId]);
 
-  const project = projectsData.find((p) => p.id === projectId);
-
-  if (!project) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center bg-[#020617] text-white font-mono text-xs tracking-widest">
-        <h2 className="mb-4 text-cyan-400">/SYSTEM/DATA_NOT_FOUND</h2>
-        <Link to="/" className="px-6 py-2 border border-white/10 rounded-full hover:bg-white/5 transition-all">
-          RETURN_TO_ARCHIVE
-        </Link>
-      </div>
-    );
-  }
+  if (!project) return (
+    <div className="h-screen flex items-center justify-center bg-[#020617] text-cyan-500 font-mono tracking-widest uppercase">
+      [!] ERROR: PROJECT_ID_NOT_FOUND
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white font-sans selection:bg-indigo-500/30 antialiased">
-      
-      {/* 1. CINEMATIC HERO SECTION */}
-      <section className="relative h-[50vh] md:h-[65vh] w-full overflow-hidden border-b border-white/5">
-        <motion.img 
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.35 }}
-          transition={{ duration: 1.5 }}
-          src={project.banner} 
-          alt={project.title} 
-          className="w-full h-full object-cover" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="text-center">
-            <span className="text-indigo-400 font-mono tracking-[0.4em] uppercase text-[10px] mb-4 block">// SYSTEM_ANALYSIS</span>
-            <h1 className="text-5xl md:text-8xl font-black bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent uppercase tracking-tighter mb-4 leading-none">
-              {project.title}
-            </h1>
-            <div className="flex items-center justify-center gap-3">
-              <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[9px] text-slate-400 font-bold uppercase tracking-widest">{project.category}</span>
-              <span className="text-[9px] text-indigo-500 font-mono uppercase tracking-widest font-black">{project.status}</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 2. TECHNICAL CONTENT */}
-      <main className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <div className="min-h-screen bg-[#020617] text-slate-300 pt-32 pb-20 px-6 font-sans selection:bg-cyan-500/30">
+      <div className="max-w-6xl mx-auto">
         
-        {/* LEFT: TECH SIDEBAR */}
-        <aside className="lg:col-span-4 space-y-8">
-          <div className="sticky top-24 p-8 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-xl border-t-white/10 transform-gpu">
-            <div className="flex items-center gap-3 mb-8">
-              <Cpu className="text-indigo-400" size={18} />
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white">System_Specs</h3>
-            </div>
-            
-            <div className="flex flex-wrap gap-2 mb-10">
-              {project.techStack.map((tech, index) => (
-                <span key={index} className="flex items-center gap-2 text-[10px] font-mono bg-white/5 text-slate-300 px-3 py-1.5 rounded-lg border border-white/5">
-                  {typeof tech === 'object' && tech.icon && (
-                    <img src={tech.icon} alt="" className="w-3 h-3 object-contain" />
-                  )}
-                  {typeof tech === 'string' ? tech : tech.name}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-10 space-y-3">
-              {project.links?.live && (
-                <a href={project.links.live} target="_blank" rel="noreferrer" className="w-full py-4 bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-indigo-400 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/10">
-                  <Globe size={14} /> LIVE_PREVIEW
-                </a>
-              )}
-              <a href={project.links?.github} target="_blank" rel="noreferrer" className="w-full py-4 bg-white/5 border border-white/10 text-white font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-                <Github size={14} /> SOURCE_CODE
-              </a>
-            </div>
-          </div>
-        </aside>
-
-        {/* RIGHT: CONTENT BLOCKS */}
-        <div className="lg:col-span-8 space-y-20">
+        {/* --- NAVIGATION & HEADER --- */}
+        <header className="mb-24 max-w-5xl">
+          <Link to="/projects" className="inline-flex items-center gap-2 text-slate-500 hover:text-white transition-colors uppercase font-mono text-[10px] tracking-[0.3em] mb-12">
+            <ArrowLeft size={12} /> Return_to_Archive
+          </Link>
           
-          <section>
-            <div className="flex items-center gap-4 mb-6 text-indigo-500">
-              <Terminal size={22} />
-              <h2 className="text-sm font-black tracking-[0.3em] uppercase">Overview</h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-3 mb-8">
+               <div className="h-[2px] w-12" style={{ backgroundColor: accentColor }} />
+               <span className="text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase">
+                 Verified_Deployment_Log // {project.date}
+               </span>
             </div>
-            <p className="text-slate-300 leading-relaxed text-lg font-medium opacity-80">
-              {project.blogContent.overview}
+
+            <h1 className="text-6xl md:text-[100px] font-black uppercase italic mb-10 leading-[0.85] tracking-tighter text-white">
+              {project.title}<span style={{ color: accentColor }}>_</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium border-l-2 border-white/10 pl-8 max-w-3xl">
+              {project.shortDesc}
             </p>
-          </section>
+          </motion.div>
+        </header>
 
-          <section className="relative p-10 bg-white/[0.02] border border-white/5 rounded-[2rem] overflow-hidden transform-gpu">
-            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
-            <h2 className="text-xs font-black text-white mb-4 uppercase tracking-[0.2em]">The Challenge</h2>
-            <p className="text-slate-400 leading-relaxed italic font-medium">"{project.blogContent.challenge}"</p>
-          </section>
+        {/* --- MAIN CONTENT GRID --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          
+          {/* LEFT SIDE: TECHNICAL DOCUMENTATION */}
+          <div className="lg:col-span-8 space-y-24">
+            
+            {/* 01_OVERVIEW */}
+            <section className="border-t border-white/5 pt-12">
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="md:col-span-1">
+                  <h2 className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: accentColor }}>
+                    01_Overview
+                  </h2>
+                </div>
+                <div className="md:col-span-3">
+                  <p className="text-xl text-white mb-10 leading-relaxed font-semibold italic">
+                    "{project.blogContent?.overview?.intro}"
+                  </p>
+                  <ul className="space-y-6">
+                    {project.blogContent?.overview?.points?.map((point, i) => (
+                      <li key={i} className="flex gap-4 group">
+                        <span className="font-mono text-xs mt-1 opacity-30 group-hover:opacity-100 transition-opacity" style={{ color: accentColor }}>
+                          {i + 1 < 10 ? `0${i+1}` : i+1}
+                        </span>
+                        <span className="text-slate-300 text-lg leading-snug">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
 
-          <section>
-            <div className="flex items-center gap-4 mb-6 text-emerald-500">
-              <Trophy size={22} />
-              <h2 className="text-sm font-black tracking-[0.3em] uppercase">Results</h2>
-            </div>
-            <p className="text-slate-300 leading-relaxed text-lg font-medium opacity-80">
-              {project.blogContent.results}
-            </p>
-          </section>
-
-          {/* SYSTEM ARCHITECTURE IMAGE */}
-          {(project.blogContent.projectimg || project.blogContent.diagram) && (
-            <section className="pt-10">
-              <div className="rounded-3xl overflow-hidden border border-white/5 bg-[#030712] p-2">
+            {/* 02_VISUAL_ASSET */}
+            {project.blogContent?.projectimg && (
+              <section className="relative rounded-xl overflow-hidden bg-slate-900 border border-white/5 shadow-2xl">
                 <img 
-                  src={project.blogContent.projectimg || project.blogContent.diagram} 
-                  alt="Architecture" 
-                  className="w-full h-auto rounded-2xl grayscale hover:grayscale-0 transition-all duration-700" 
+                  src={project.blogContent.projectimg} 
+                  alt="System Architecture" 
+                  className="w-full opacity-80 hover:opacity-100 transition-opacity duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/40 to-transparent" />
+              </section>
+            )}
+
+            {/* 03_IMPLEMENTATION */}
+            <section className="border-t border-white/5 pt-12">
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="md:col-span-1">
+                  <h2 className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: accentColor }}>
+                    02_Execution
+                  </h2>
+                </div>
+                <div className="md:col-span-3">
+                   <p className="text-lg text-slate-300 mb-10 leading-relaxed">{project.blogContent?.implementation?.intro}</p>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {project.blogContent?.implementation?.points?.map((p, i) => (
+                        <div key={i} className="p-5 bg-white/[0.02] border border-white/5 rounded-lg flex items-center gap-4 group hover:border-white/10 transition-colors">
+                          <Terminal size={14} style={{ color: accentColor }} className="opacity-50" />
+                          <span className="text-xs font-mono text-slate-400 group-hover:text-slate-200 transition-colors">{p}</span>
+                        </div>
+                      ))}
+                   </div>
+                </div>
               </div>
             </section>
-          )}
 
-          {/* UNIVERSAL ARTIFACTS SECTION */}
-          {project.links?.report && (
-            <section className="p-8 md:p-12 bg-white/[0.02] border border-white/5 rounded-[2.5rem] relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[100px] rounded-full" />
-              
-              {/* CYBER SCANNER CARD */}
-              <div className="relative group shrink-0">
-                <div className="w-44 h-56 bg-[#030712] rounded-lg shadow-2xl overflow-hidden transform -rotate-2 group-hover:rotate-0 transition-all duration-500 border border-white/10 relative">
-                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#4f46e5 1px, transparent 1px), linear-gradient(90deg, #4f46e5 1px, transparent 1px)', backgroundSize: '15px 15px' }} />
-                  <div className="absolute top-0 left-0 w-full h-1 bg-indigo-500/50 shadow-[0_0_15px_#4f46e5] animate-scan" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                    <FileText size={40} className="text-indigo-500/40 mb-2" />
-                    <div className="w-full space-y-2 opacity-30">
-                      <div className="h-1 w-full bg-indigo-500/50 rounded" />
-                      <div className="h-1 w-3/4 bg-indigo-500/50 rounded" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-2 left-2 font-mono text-[6px] text-indigo-400/60 leading-tight">
-                    {`> SYSTEM_VERIFIED\n> LOGIC_AUDIT_PASS\n> ENCRYPTED_STREAMS`}
-                  </div>
-                </div>
-                <div className="absolute -bottom-3 -right-3 bg-[#020617] border border-white/10 text-indigo-400 text-[8px] font-black px-3 py-2 rounded-lg shadow-xl uppercase tracking-widest">
-                  v2.0_Verified
-                </div>
-              </div>
-
-              <div className="flex-1 text-center md:text-left z-10">
-                <div className="flex items-center gap-3 mb-2 justify-center md:justify-start">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <h3 className="text-xl font-black uppercase tracking-tighter text-white">Technical_Deliverables</h3>
-                </div>
-                <p className="text-slate-400 text-sm mb-6 font-medium leading-relaxed max-w-xl">
-                  High-fidelity documentation mapping the <strong>system architecture</strong> and 
-                  <strong>performance benchmarks</strong>. This artifact validates my ability to 
-                  engineer stable, scalable, and fully-audited technical solutions.
+            {/* 04_CHALLENGE & SOLUTION GRID */}
+            <section className="grid md:grid-cols-2 gap-1 bg-white/5 border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="p-10 bg-[#020617]">
+                <h3 className="text-[10px] font-bold text-red-500 uppercase tracking-[0.3em] mb-8 flex items-center gap-2">
+                  <AlertCircle size={14} /> The_Challenge
+                </h3>
+                <p className="text-slate-300 leading-relaxed font-medium">
+                  {project.blogContent?.challenge?.intro}
                 </p>
-                <a href={project.links.report} download className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black text-[10px] tracking-[0.2em] rounded-xl hover:bg-indigo-500 hover:text-white transition-all transform hover:-translate-y-1 active:scale-95">
-                  <Download size={14} /> DOWNLOAD_TECHNICAL_REPORT
-                </a>
+              </div>
+              <div className="p-10 bg-[#020617] border-l border-white/5">
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-2" style={{ color: accentColor }}>
+                  <CheckCircle2 size={14} /> The_Outcome
+                </h3>
+                <p className="text-slate-300 leading-relaxed font-medium">
+                  {project.blogContent?.results?.intro}
+                </p>
               </div>
             </section>
-          )}
-
-          {/* FOOTER NAVIGATION */}
-          <div className="pt-12 border-t border-white/5">
-            <Link to="/" className="group inline-flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-500 hover:text-white transition-colors uppercase">
-              <ArrowLeft size={16} className="group-hover:-translate-x-2 transition-transform" />
-              BACK_TO_ARCHIVE
-            </Link>
           </div>
+
+          {/* RIGHT SIDE: METADATA & ASSETS */}
+          <aside className="lg:col-span-4">
+            <div className="sticky top-32 space-y-12">
+              
+              {/* Primary Actions */}
+              <div>
+                <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] mb-6">Production_Links</h4>
+                <div className="space-y-3">
+                  {project.links?.live && (
+                    <a href={project.links.live} target="_blank" rel="noreferrer" 
+                      className="flex items-center justify-between p-5 bg-white text-black text-xs font-black hover:bg-cyan-400 transition-all rounded-xl">
+                      LAUNCH_LIVE_SYSTEM <ExternalLink size={18} />
+                    </a>
+                  )}
+                  {project.links?.github && (
+                    <a href={project.links.github} target="_blank" rel="noreferrer" 
+                      className="flex items-center justify-between p-5 border border-white/10 text-xs font-black hover:bg-white/5 transition-all text-white rounded-xl">
+                      REPOS_SOURCE <Github size={18} />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Stack Composition */}
+              <div>
+                <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] mb-6">Stack_Composition</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech, i) => (
+                    <span key={i} className="text-[11px] font-mono text-slate-300 border border-white/10 px-3 py-1.5 rounded-md bg-white/[0.02] hover:border-cyan-500/30 transition-colors">
+                      {typeof tech === 'string' ? tech : tech.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* System Stats Block */}
+              <div className="p-8 bg-white/[0.02] border-l-2 rounded-r-2xl" style={{ borderColor: accentColor }}>
+                <div className="space-y-4 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+                  <div className="flex justify-between">
+                    <span>Status:</span>
+                    <span className="text-white">{project.status}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Category:</span>
+                    <span className="text-white">{project.category}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Build_ID:</span>
+                    <span className="text-white">PX-{project.id.toUpperCase()}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
         </div>
-      </main>
+      </div>
     </div>
   );
 };

@@ -10,14 +10,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // This splits your code into smaller, more manageable pieces
+        // Updated: Removed 'swiper' from the vendor chunk
         manualChunks: {
-          'vendor-ui': ['framer-motion', 'swiper', 'lucide-react'],
+          'vendor-ui': ['framer-motion', 'lucide-react'],
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
         },
       },
     },
-    // Optional: Increase the warning limit if you're okay with larger chunks
     chunkSizeWarningLimit: 600, 
   },
 })

@@ -22,12 +22,13 @@ html {
 }
 
 /* --- 2. LAYER PROMOTION & COMPOSITING --- */
+/* REMOVED: .project-swiper (Legacy Swiper reference) */
 section, 
 .HeroContainer_wrapper, 
 .StatsRibbon_wrapper,
-.project-swiper,
 .profile-card-body,
-.profile-container {
+.profile-container,
+.smooth-gpu-layer {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -82,7 +83,6 @@ section,
 
 /* --- 6. MOBILE "TURBO" PERFORMANCE (Max 1023px) --- */
 @media (max-width: 1023px) {
-  /* Kill Backdrop-Blur & Heavy Shadows */
   .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-lg, .backdrop-blur-md {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -94,7 +94,6 @@ section,
     box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
   }
 
-  /* Flatten 3D transforms to stop scroll jitter */
   .profile-layer-hero, 
   .profile-layer-text, 
   .profile-layer-base { 
@@ -107,60 +106,55 @@ section,
   }
 }
 
-/* --- 7. EXTERNAL LIBRARY OPTIMIZATION --- */
-.swiper-wrapper {
-  will-change: transform;
-  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1) !important;
-}
-
-.swiper-slide {
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
-}
+/* --- 7. CLEANUP: REMOVED SWIPER CLASSES --- */
+/* The following were removed to fix the build error:
+   .swiper-wrapper, .swiper-slide
+*/
 
 @keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+  100% { transform: translateX(100%); }
 }
 
-/* Ensure buttons don't have that "blue highlight" box on mobile tap */
 a, button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Optional: Add a subtle glow to the primary button on hover */
 .action-btn-glow {
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
 }
 
-/* --- HOVER PERFORMANCE OPTIMIZATIONS --- */
-
 /* --- MOBILE PERFORMANCE ENGINE --- */
-
 .transform-gpu {
-  /* Forces the element onto its own GPU layer */
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-/* Fixes the 'Sticky' Hover on Mobile 
-   (Ensures the hover state clears after the tap) */
 @media (hover: none) {
   .group:active {
     background-color: rgba(255, 255, 255, 0.05);
-    transition: none; /* Instant feedback on mobile tap */
+    transition: none;
   }
 }
 
-/* Optimization: Tell the browser these won't change layout */
 .SpecialtyCard_wrapper {
   contain: content;
 }
 
-/* Prevent text selection while tapping cards on mobile */
 .no-select {
   -webkit-user-select: none;
   user-select: none;
+}
+
+/* --- UTILITY LAYER --- */
+@layer utilities {
+  .animate-snake-top { animation: snake-top 2s linear infinite; }
+  .animate-snake-right { animation: snake-right 2s linear infinite; }
+  .animate-snake-bottom { animation: snake-bottom 2s linear infinite; }
+  .animate-snake-left { animation: snake-left 2s linear infinite; }
+
+  @keyframes snake-top { 0% { left: -100%; } 100% { left: 100%; } }
+  @keyframes snake-right { 0% { top: -100%; } 100% { top: 100%; } }
+  @keyframes snake-bottom { 0% { right: -100%; } 100% { right: 100%; } }
+  @keyframes snake-left { 0% { bottom: -100%; } 100% { bottom: 100%; } }
 }

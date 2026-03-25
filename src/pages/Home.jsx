@@ -52,18 +52,12 @@ const Home = ({ data }) => {
           </div>
         </section>
 
-        {/* 5. SKILLS: Consistent vertical rhythm */}
-        <section id="capabilities" className="py-20 md:py-28 px-4 border-t border-white/5" style={{ contentVisibility: 'auto' }}>
-          <div className="max-w-5xl mx-auto">
-            <header className="text-center mb-12">
-              <h2 className="text-[10px] font-black tracking-[0.8em] uppercase text-slate-500">I AM EXPERIENCED IN</h2>
-              <div className="h-[1px] w-32 bg-cyan-500/50 mx-auto mt-4" />
-            </header>
-            <div className="relative bg-[#030712] rounded-lg overflow-hidden border border-white/5 shadow-2xl will-change-transform">
-                <MemoizedSkillTerminal />
-            </div>
-          </div>
-        </section>
+        {/* 5. SKILLS: Clean and concise implementation */}
+<section id="capabilities" className="py-20 md:py-28 px-4 border-t border-white/5" style={{ contentVisibility: 'auto' }}>
+  <div className="max-w-5xl mx-auto">
+    <MemoizedSkillTerminal />
+  </div>
+</section>
 
         {/* 6. FINAL CTA: Matches section padding exactly */}
         <section className="py-20 md:py-28 px-4 border-t border-white/5">
