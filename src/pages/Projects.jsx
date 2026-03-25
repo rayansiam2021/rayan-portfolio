@@ -26,14 +26,17 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-[#020617] text-white selection:bg-cyan-500/30">
+      {/* Hero Section */}
       <ProjectHero />
 
-      <section className="max-w-7xl mx-auto px-6 pb-32">
+      <section className="max-w-7xl mx-auto px-6 pb-32 relative z-10">
+        {/* Category Filters */}
         <ProjectFilters 
           active={activeFilter} 
           setActive={setActiveFilter} 
         />
 
+        {/* System Counter Bar */}
         <div className="flex items-center gap-4 mb-12 opacity-50">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent" />
           <span className="text-[10px] font-mono tracking-widest uppercase">
@@ -41,6 +44,7 @@ const Projects = () => {
           </span>
         </div>
 
+        {/* Project Grid with Layout Animations */}
         <motion.div 
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -55,11 +59,12 @@ const Projects = () => {
           </AnimatePresence>
         </motion.div>
 
+        {/* Empty State: Sector Error */}
         {filteredProjects.length === 0 && (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="py-32 text-center border border-dashed border-white/10 rounded-[2rem]"
+            className="py-32 text-center border border-dashed border-white/10 rounded-[2rem] bg-white/[0.01]"
           >
             <p className="text-slate-500 font-mono text-xs uppercase tracking-[0.3em]">
               [!] No_Data_Found_In_This_Sector
@@ -68,9 +73,10 @@ const Projects = () => {
         )}
       </section>
 
-      {/* Global Background Glow */}
+      {/* Global Background Glow Effects */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/5 blur-[120px]" />
+        <div className="absolute bottom-[-5%] left-[-5%] w-[30%] h-[30%] bg-cyan-600/5 blur-[100px]" />
       </div>
     </div>
   );
