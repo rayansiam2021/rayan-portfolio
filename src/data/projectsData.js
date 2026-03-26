@@ -5,9 +5,15 @@ export const projectsData = [
     title: "AI & Plagiarism Detection System",
     category: "Coded Web Solutions",
     shortDesc: "An intelligent document analysis platform that detects plagiarism and AI-generated content with detailed scoring and source tracking.",
-    banner: "/assets/projects/plagiarism-detector-bg.jpg",
+    banner: "/assets/projectimg/ai-plagiarism/ai-banner.png", 
     techStack: [
       { name: "FastAPI" }, { name: "Python" }, { name: "HuggingFace" }, { name: "SQLite" }, { name: "Google API" }
+    ],
+    screenshots: [
+      "/assets/projectimg/ai-plagiarism/ai.png",
+      "/assets/projectimg/ai-plagiarism/ai-1.png",
+      "/assets/projectimg/ai-plagiarism/ai-2.png",
+      "/assets/projectimg/ai-plagiarism/ai-architecture.png"
     ],
     status: "STATUS_STABLE",
     color: "#6366f1",
@@ -43,13 +49,13 @@ export const projectsData = [
           "Delivered a fast, scalable, and user-friendly experience"
         ]
       },
-      projectimg: "/assets/projectimg/ai-plagiarism-architecture.png"
+      projectimg: "/assets/projectimg/ai-plagiarism/ai-architecture.png"
     },
     links: {
       github: "https://github.com/rayansiam2021/A-plagiarism-and-web-content-detection-system",
       report: "/assets/docs/ai-plagiarism-report-221.docx"
     }
-  }, // ADDED MISSING COMMA
+  },
 
   // --- WORDPRESS ---
   {
@@ -57,22 +63,17 @@ export const projectsData = [
     title: "VidmoCraft",
     category: "Wordpress",
     shortDesc: "A high-end WordPress portfolio platform engineered with Elementor Pro, featuring advanced scroll-based animations and optimized asset delivery.",
-    // Updated to your local high-res hero image
-    banner: "/assets/projectimg/vidmocraft/vidmocraft.png", 
+    banner: "/assets/projectimg/vidmocraft/vidmocraft-banner.png", 
     techStack: [
-      { name: "WordPress" }, 
-      { name: "Elementor Pro" }, 
-      { name: "SEO" }, 
-      { name: "UI/UX Design" }
+      { name: "WordPress" }, { name: "Elementor Pro" }, { name: "SEO" }, { name: "UI/UX Design" }
     ],
-    // New: Professional Gallery Array
     screenshots: [
       "/assets/projectimg/vidmocraft/vidmocraft.png",
       "/assets/projectimg/vidmocraft/vidmocraft1.png",
       "/assets/projectimg/vidmocraft/vidmocraft2.png"
     ],
     status: "LIVE_PRODUCTION",
-    color: "#06b6d4", // Changed to Cyan-500 to match your branding
+    color: "#06b6d4",
     date: "Jan 2026",
     blogContent: {
       overview: {
@@ -113,16 +114,23 @@ export const projectsData = [
     links: {
       live: "https://vidmocraft.com/"
     }
-}, // ADDED MISSING COMMA
+  },
 
   {
     id: "qatar-ac-repairs",
     title: "Qatar AC Repairs",
     category: "Wordpress",
     shortDesc: "A service-focused WordPress website designed to generate leads through a clean, conversion-driven UI.",
-    banner: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1200",
+    banner: "/assets/projectimg/qatar-ac/ac-repair-banner.png", 
     techStack: [
       { name: "WordPress" }, { name: "Elementor" }, { name: "UI/UX Design" }, { name: "SEO" }
+    ],
+    screenshots: [
+      "/assets/projectimg/qatar-ac/ac-repair.png",
+      "/assets/projectimg/qatar-ac/ac-repair1.png",
+      "/assets/projectimg/qatar-ac/ac-repair2.png",
+      "/assets/projectimg/qatar-ac/ac-repair3.png",
+      "/assets/projectimg/qatar-ac/ac-repair4.png"
     ],
     status: "LIVE_PRODUCTION",
     color: "#0ea5e9",
@@ -165,7 +173,7 @@ export const projectsData = [
     links: {
       live: "https://qataracrepairs.com/"
     }
-  }, // ADDED MISSING COMMA
+  },
 
   // --- IOT ---
   {
@@ -173,9 +181,13 @@ export const projectsData = [
     title: "IoT Autonomous Path-Finder",
     category: "IOT",
     shortDesc: "A self-driving robot car that uses sound waves to 'see' its surroundings. It can navigate through a room on its own by detecting and steering around obstacles.",
-    banner: "/assets/projects/robot-bg.jpg",
+    banner: "/assets/projectimg/obstacle-car/banner.png",
     techStack: [
       { name: "C++ (Arduino)" }, { name: "L293D Shield" }, { name: "HC-SR04 Sensor" }, { name: "Embedded Systems" }
+    ],
+    screenshots: [
+      "/assets/projectimg/obstacle-car/banner.png",
+      "/assets/projectimg/obstacle-car/circuit.png"
     ],
     status: "HARDWARE_VERIFIED",
     color: "#3b82f6",
@@ -208,7 +220,7 @@ export const projectsData = [
           "Proven hardware setup that is ready for further AI upgrades"
         ]
       },
-      projectimg: "/assets/projectimg/robot-circuitry.png" 
+      projectimg: "/assets/projectimg/obstacle-car/banner.png" 
     },
     links: {
       github: "https://github.com/rayansiam2021/IOT",

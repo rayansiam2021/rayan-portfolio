@@ -4,6 +4,7 @@ import {
   Terminal, Cpu, Globe, Database, Layers, 
   Code2, Zap, ShoppingCart, Settings2, Boxes, Share2 
 } from 'lucide-react';
+import GradientText from './bits/GradientText';
 
 const SkillTerminal = () => {
   const [activeTab, setActiveTab] = useState('frontend');
@@ -44,22 +45,25 @@ const SkillTerminal = () => {
     <div className="w-full max-w-4xl mx-auto font-mono relative">
       
       {/* 🎯 CUSTOM HEADER INTEGRATION */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-12 md:mb-16 text-center w-full flex flex-col items-center"
-      >
-        <h2 className="text-white font-black text-3xl md:text-5xl uppercase tracking-tighter mb-3 leading-[0.85]">
-          Core <span className="text-cyan-500">Capabilities</span>
-        </h2>
-        <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[550px]">
-          I build full-stack web applications, WordPress websites, and smart IoT systems 
+      
+                    <motion.div 
+                           initial={{ opacity: 0, y: 20 }}
+                           whileInView={{ opacity: 1, y: 0 }}
+                           viewport={{ once: true }}
+                           className="mb-8 md:mb-10 text-center w-full flex flex-col items-center"
+                         >
+                             <GradientText
+                                                   colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                   className="text-3xl md:text-4xl font-black uppercase tracking-tighter"
+                                                 >
+                                                   CAPABILITIES
+                                                 </GradientText>
+                             <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
+                               I build full-stack web applications, WordPress websites, and smart IoT systems 
           focused on solving real-world problems through clean, efficient code.
-        </p>
-        <div className="mt-6 h-[1px] w-16 bg-cyan-500/50 rounded-full" />
-      </motion.div>
-
+                             </p>
+                             <div className="mt-4 h-[1px] w-16 bg-cyan-500/50 rounded-full" />
+                         </motion.div>
       {/* TERMINAL OUTER FRAME */}
       <div className="relative p-[1px] md:p-[2.5px] rounded-[24px] overflow-hidden group smooth-gpu-layer">
         

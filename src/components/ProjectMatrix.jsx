@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Terminal, Box, Cpu, Globe } from 'lucide-react';
 import { projectsData } from '../data/projectsData';
+import GradientText from './bits/GradientText';
 
 const ProjectCard = React.memo(({ project }) => {
   const navigate = useNavigate();
@@ -83,9 +84,12 @@ const ProjectMatrix = () => {
         viewport={{ once: true }}
         className="mb-16 md:mb-20 text-center w-full flex flex-col items-center"
       >
-        <h2 className="text-white font-black text-3xl md:text-5xl uppercase tracking-tighter mb-3">
-          Selected <span className="text-cyan-500">Deployments</span>
-        </h2>
+        <GradientText
+                              colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                              className="text-3xl md:text-4xl font-black uppercase tracking-tighter"
+                            >
+                              SELECTED DEPLOYMENYS
+                            </GradientText>
         <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
           A high-level index of my work across full-stack development, 
           IoT architecture, and professional WordPress solutions.

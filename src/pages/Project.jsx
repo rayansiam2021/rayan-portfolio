@@ -6,6 +6,7 @@ import {
   ArrowLeft, ExternalLink, FileText, Github, 
   CheckCircle2, AlertCircle, Terminal, Link as LinkIcon 
 } from 'lucide-react';
+import GradientText from '../components/bits/GradientText';
 
 const Project = () => {
   const { projectId } = useParams();
@@ -36,32 +37,59 @@ const Project = () => {
       <div className="max-w-6xl mx-auto">
         
         {/* --- NAVIGATION & HEADER --- */}
-        <header className="mb-24 max-w-5xl">
-          <Link to="/projects" className="inline-flex items-center gap-2 text-slate-500 hover:text-white transition-colors uppercase font-mono text-[10px] tracking-[0.3em] mb-12">
-            <ArrowLeft size={12} /> Return_to_Archive
-          </Link>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-               <div className="h-[2px] w-12" style={{ backgroundColor: accentColor }} />
-               <span className="text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase">
-                 Verified_Deployment_Log // {project.date}
-               </span>
-            </div>
+                             <header className="mb-24 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center text-center">
+  {/* BACK NAVIGATION - Centered with equal spacing */}
+  <Link 
+    to="/projects" 
+    className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-all uppercase font-mono text-[10px] tracking-[0.4em] mb-16 group"
+  >
+    <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" /> 
+    Return_to_Archive
+  </Link>
+  
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }} 
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    className="flex flex-col items-center w-full"
+  >
+    {/* SYSTEM LOG HEADER - Centered with flanking accents */}
+    <div className="flex items-center gap-4 mb-8">
+       <div className="h-[1px] w-8 md:w-12 opacity-50" style={{ backgroundColor: accentColor }} />
+       <span className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-slate-500 uppercase font-mono">
+         Verified_Deployment_Log // {project.date}
+       </span>
+       <div className="h-[1px] w-8 md:w-12 opacity-50" style={{ backgroundColor: accentColor }} />
+    </div>
 
-            <h1 className="text-6xl md:text-[100px] font-black uppercase italic mb-10 leading-[0.85] tracking-tighter text-white">
-              {project.title}<span style={{ color: accentColor }}>_</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium border-l-2 border-white/10 pl-8 max-w-3xl">
-              {project.shortDesc}
-            </p>
-          </motion.div>
-        </header>
+    {/* MAIN TITLE - Forced Center Alignment */}
+    <div className="mb-10 w-full flex justify-center">
+      <GradientText
+        colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+        animationSpeed={6}
+        showBorder={false}
+        className="justify-center items-center text-center w-full p-0" 
+      >
+        <h1 className="text-3xl md:text-[45px] font-black uppercase  leading-[0.85] tracking-tighter text-center">
+          {project.title}
+          <span className="ml-2 animate-pulse" style={{ color: accentColor }}>_</span>
+        </h1>
+      </GradientText>
+    </div>
+
+    {/* DESCRIPTION - Centered without the left-border sidebar */}
+    <div className="relative mt-8 max-w-2xl px-4">
+      <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium">
+        {project.shortDesc}
+      </p>
+      {/* Optional: A small centered bottom accent to replace the side border */}
+      <div 
+        className="h-[2px] w-16 mx-auto mt-8 opacity-20" 
+        style={{ backgroundColor: accentColor || '#ffffff' }} 
+      />
+    </div>
+  </motion.div>
+</header>
 
         {/* --- MAIN CONTENT GRID --- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">

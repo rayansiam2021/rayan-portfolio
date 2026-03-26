@@ -1,5 +1,7 @@
 import React from 'react';
-import { Download, ExternalLink, Mail, Terminal, Cpu, Layout, ShieldCheck } from 'lucide-react';
+import { Download, ExternalLink, Mail, Terminal, Cpu, Layout, ShieldCheck, Import } from 'lucide-react';
+import GradientText from '../bits/GradientText';
+
 
 const BioSection = () => {
   return (
@@ -7,27 +9,34 @@ const BioSection = () => {
       <div className="max-w-[1200px] w-full flex flex-col items-center lg:items-start">
         
         {/* 1. STATUS TAGS - Tightened Margin */}
-        <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-2">
-          <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/5 border border-emerald-500/20 rounded-full">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-            <span className="text-[10px] font-mono font-black text-emerald-400 uppercase tracking-widest">Available_For_Hire</span>
-          </div>
-          <div className="flex items-center gap-1 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
-            <ShieldCheck size={12} className="text-blue-400" />
-            <span className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-widest">Verified_Engineer</span>
-          </div>
-        </div>
+        {/* Badge Container - Centered for all screen sizes */}
+<div className="flex flex-wrap justify-center items-center gap-3 mb-6 w-full">
+  
+  {/* Available For Hire Badge */}
+  <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-500/5 border border-emerald-500/20 rounded-full backdrop-blur-sm">
+    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
+    <span className="text-[10px] font-mono font-black text-emerald-400 uppercase tracking-[0.2em]">
+      Available_For_Hire
+    </span>
+  </div>
+
+  {/* Verified Engineer Badge */}
+  <div className="flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
+    <ShieldCheck size={12} className="text-blue-400" />
+    <span className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-[0.2em]">
+      Verified_Engineer
+    </span>
+  </div>
+
+</div>
 
         {/* 2. HEADLINE - Gap Removed */}
-        <div className="mb-2 text-center lg:text-left">
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[1.1] text-white">
-             
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400 bg-clip-text text-transparent italic">
-              CIS DEVELOPER
-            </span>
-          </h1>
-        </div>
+        <GradientText
+                      colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                      className="text-3xl md:text-4xl font-black uppercase tracking-tighter"
+                    >
+                      CIS DEVELOPER
+                    </GradientText>
 
         {/* 3. DESCRIPTION */}
         <p className="max-w-2xl text-slate-400 text-base md:text-lg leading-relaxed mb-10 text-center lg:text-left">

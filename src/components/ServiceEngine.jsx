@@ -1,6 +1,8 @@
 import React from 'react';
 import { Globe, Layout, Cpu, ArrowRight, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GradientText from './bits/GradientText';
+
 
 const services = [
   {
@@ -95,9 +97,12 @@ const ServiceEngine = () => {
         viewport={{ once: true }}
         className="mb-8 md:mb-10 text-center w-full flex flex-col items-center"
       >
-          <h2 className="text-white font-black text-3xl md:text-5xl uppercase tracking-tighter mb-3">
-            What <span className="text-cyan-500">I Do</span>
-          </h2>
+          <GradientText
+                                colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                className="text-3xl md:text-4xl font-black uppercase tracking-tighter"
+                              >
+                                WHAT I DO
+                              </GradientText>
           <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
             I build full-stack web applications, WordPress websites, and smart IoT systems focused on solving real-world problems.
           </p>
