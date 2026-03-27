@@ -13,7 +13,7 @@ export const CTA_CONFIGS = {
   projects: {
   variant: "secondary",
   badge: "AVAILABLE_FOR_PROJECTS",
-  title: "Have a Project in Mind? Let’s Build It Right.",
+  title: "Have a Project in Mind? Let’s Build It.",
   description: "I help turn ideas into scalable web applications, high-performance WordPress websites, and smart IoT systems. If you need a reliable developer who can deliver real results — let’s talk.",
 
   primaryAction: { 
