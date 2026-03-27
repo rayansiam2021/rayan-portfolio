@@ -5,6 +5,7 @@ import ServiceEngine from '../components/ServiceEngine';
 import ProjectMatrix from '../components/ProjectMatrix';
 import SkillTerminal from '../components/SkillTerminal';
 import ConversionCTA from '../components/ConversionCTA';
+import ContactForm from '../components/ContactForm'; //
 import { CTA_CONFIGS } from '../data/ctaData';
 
 // Memoized for performance during scroll
@@ -23,22 +24,22 @@ const Home = ({ data }) => {
 
       <div className="relative z-10">
         
-        {/* 1. HERO: Tighter bottom padding to meet the Stats Ribbon */}
+        {/* 1. HERO */}
         <section className="min-h-[80vh] flex items-center justify-center pt-24 pb-12 px-4 relative">
           <HeroContainer data={data} />
         </section>
 
-        {/* 2. STATS RIBBON: Negative margin pulls Hero and Services together */}
+        {/* 2. STATS RIBBON */}
         <div className="relative z-20 -my-8 md:-my-12">
           <StatsRibbon />
         </div>
 
-        {/* 3. SERVICES: Standardized top padding creates the 'perfect' gap */}
+        {/* 3. SERVICES */}
         <section id="services" className="pt-16 pb-20 md:pt-24 md:pb-28 px-4 border-t border-white/5 bg-[#030712]/40">
           <ServiceEngine />
         </section>
 
-        {/* 4. PROJECTS: Consistent vertical rhythm */}
+        {/* 4. PROJECTS */}
         <section id="archive" className="py-20 md:py-28 px-4 border-t border-white/5 bg-[#030712]/20" style={{ contentVisibility: 'auto' }}>
           <div className="max-w-7xl mx-auto">
             <MemoizedProjectMatrix />
@@ -52,17 +53,24 @@ const Home = ({ data }) => {
           </div>
         </section>
 
-        {/* 5. SKILLS: Clean and concise implementation */}
-<section id="capabilities" className="py-20 md:py-28 px-4 border-t border-white/5" style={{ contentVisibility: 'auto' }}>
-  <div className="max-w-5xl mx-auto">
-    <MemoizedSkillTerminal />
-  </div>
-</section>
+        {/* 5. SKILLS */}
+        <section id="capabilities" className="py-20 md:py-28 px-4 border-t border-white/5" style={{ contentVisibility: 'auto' }}>
+          <div className="max-w-5xl mx-auto">
+            <MemoizedSkillTerminal />
+          </div>
+        </section>
 
-        {/* 6. FINAL CTA: Matches section padding exactly */}
-        <section className="py-20 md:py-28 px-4 border-t border-white/5">
+        {/* 6. FINAL CTA */}
+        <section className="py-20 md:py-28 px-4 border-t border-white/5 bg-[#030712]/10">
           <div className="max-w-7xl mx-auto">
             <ConversionCTA {...CTA_CONFIGS.homepage} />
+          </div>
+        </section>
+
+        {/* 7. CONTACT FORM */}
+        <section id="contact" className="py-24 md:py-32 px-4 border-t border-white/5 bg-gradient-to-b from-transparent to-cyan-500/5">
+          <div className="max-w-5xl mx-auto">
+            <ContactForm />
           </div>
         </section>
       </div>

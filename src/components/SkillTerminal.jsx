@@ -54,13 +54,14 @@ const SkillTerminal = () => {
                          >
                              <GradientText
                                                    colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-                                                   className="text-3xl md:text-4xl font-black uppercase tracking-tighter"
+                                                   className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
                                                  >
                                                    CAPABILITIES
                                                  </GradientText>
                              <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
-                               I build full-stack web applications, WordPress websites, and smart IoT systems 
-          focused on solving real-world problems through clean, efficient code.
+                                               Below is a list of the tech stack that I have used to solve problems across a 
+          <span className="text-cyan-400 font-bold"> 3-year development cycle </span> 
+           while being in my university and through freelance.
                              </p>
                              <div className="mt-4 h-[1px] w-16 bg-cyan-500/50 rounded-full" />
                          </motion.div>

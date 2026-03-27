@@ -6,25 +6,25 @@ import GradientText from './bits/GradientText';
 
 const services = [
   {
-    title: "Digital Solutions",
-    subtitle: "FULL-STACK DEVELOPMENT",
+    title: "WEB APPLICATION DEVELOPMENT",
+    subtitle: " CODED WEB APPLICATION",
     desc: "Developing scalable full-stack web applications using React, FastAPI, and MySQL with clean architecture and high performance.",
     icon: <Globe size={22} />,
     color: "#00d4ff",
   },
   {
-    title: "Web Platforms",
-    subtitle: "WORDPRESS DEVELOPMENT",
+    title: "WORDPRESS DEVELOPMENT",
+    subtitle: "ALL KIDS OF WORDPRESS",
     desc: "Developing and deploying high-performance WordPress websites with full customization, optimization, and secure hosting.",
     icon: <Layout size={22} />,
     color: "#10b981",
   },
   {
-    title: "Smart Systems",
-    subtitle: "IOT SYSTEMS",
-    desc: "Building Arduino-based smart systems with sensor integration for automation and real-time control.",
+    title: "IOT SYSTEMS",
+    subtitle: "SMART SYSTEMS",
+    desc: "Building Microcontroller-based smart systems with sensor integration for automation and real-time control.",
     icon: <Cpu size={22} />,
-    color: "#f97316",
+    color: "#e0e41a",
   }
 ];
 
@@ -67,11 +67,11 @@ const ServiceCard = ({ service, index }) => {
             {service.title}
           </h3>
 
-          <p className="text-[9px] font-mono text-slate-500 tracking-[0.3em] mb-4 uppercase font-bold">
+          <p className="text-[14px] font-mono text-slate-500 tracking-[0.3em] mb-4 uppercase font-bold">
             {service.subtitle}
           </p>
           
-          <p className="text-[#a0a0a0] text-[14px] leading-[1.6] mb-6 flex-grow font-light max-w-[280px]">
+          <p className="text-[#fffff0] text-[18px] leading-[1.6] mb-6 flex-grow font-light max-w-[280px]">
             {service.desc}
           </p>
 
@@ -103,9 +103,10 @@ const ServiceEngine = () => {
                               >
                                 WHAT I DO
                               </GradientText>
-          <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
+          <p className="text-slate-300 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
             I build full-stack web applications, WordPress websites, and smart IoT systems focused on solving real-world problems.
           </p>
+          
           <div className="mt-4 h-[1px] w-16 bg-cyan-500/50 rounded-full" />
       </motion.div>
 
