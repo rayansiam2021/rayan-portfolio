@@ -26,15 +26,18 @@ export const CTA_CONFIGS = {
     link: "https://www.upwork.com/freelancers/~010b9b0bfb0905eb7e" 
   }
 },
-  contact: {
-    variant: "minimal",
-    badge: "OPEN_FOR_PROJECTS",
-    title: "Looking for the right Technical Partner?",
-    description: "From concept to deployment, I build solutions that are fast, reliable, and built for real-world use.Let’s discuss how I can scale your next big idea.",
-    primaryAction: { label: "Send Inquiry", link: "#contact-form" }, 
-    secondaryAction: { 
-    label: "Hire Me", 
+ contact: {
+  variant: "minimal",
+  badge: "READY_TO_CHAT", // Less robotic than "OPEN_FOR_PROJECTS"
+  title: "Hey, I’m Rayan 👋",
+  description: "I build web apps, APIs, and IoT projects. If you’ve got an idea or just need help with something technical, feel free to reach out—let's architect the future together.",
+  primaryAction: { 
+    label: "Send me a message", // More conversational
+    link: "#contact-form" 
+  }, 
+  secondaryAction: { 
+    label: "Check my Upwork", 
     link: "https://www.upwork.com/freelancers/~010b9b0bfb0905eb7e" 
   }
-  }
+}
 };
