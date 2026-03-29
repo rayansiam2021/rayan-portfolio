@@ -31,12 +31,18 @@ const ServiceHighlights = () => {
 
   return (
     <div className="mt-24 mb-32">
-      <div className="flex flex-col mb-12">
-        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-500 mb-2">Capabilities_v2.0</span>
-        <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">
-          Here are a few things <br /> <span className="text-slate-500">I can help you with:</span>
-        </h2>
-      </div>
+                               <div className="flex flex-col mb-16 items-center text-center">
+  <span className="text-[10px] font-black uppercase tracking-[0.5em] text-cyan-500 mb-4">
+    Capabilities_v2.0
+  </span>
+  <h2 className="text-3xl md:text-4xl font-black text-white italic uppercase tracking-tighter leading-tight">
+    Here are a few things <br /> 
+    <span className="text-slate-500">I can help you with:</span>
+  </h2>
+  
+  {/* Optional: Add a small center divider for extra visual polish */}
+  <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-6" />
+</div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, idx) => (
