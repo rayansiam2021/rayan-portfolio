@@ -185,3 +185,29 @@ a, button {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* 🚀 GLOBAL MOBILE TURBO MODE */
+@media (max-width: 1024px) {
+  /* Disable expensive backdrop blurs globally on mobile */
+  .backdrop-blur-3xl, 
+  .backdrop-blur-2xl, 
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* Use a solid, high-opacity background for speed */
+    background-color: rgba(3, 7, 18, 0.98) !important;
+  }
+
+  /* Reduce the calculation cost of the "Snake" glow */
+  [style*="conic-gradient"] {
+    filter: blur(10px) !important; /* Drops from 25px to 10px */
+  }
+
+  /* Force all "Cards" into their own GPU layer without editing JSX */
+  /* This targets any div that looks like a card or container */
+  div[class*="rounded-"], section {
+    transform: translateZ(0);
+    will-change: transform;
+    contain: paint;
+  }
+}

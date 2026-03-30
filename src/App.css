@@ -1,45 +1,62 @@
-/* --- RESET DEFAULT VITE BLOAT --- */
+/* --- 1. RESET & CORE ENGINE --- */
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
-  /* Clean slate for our new Matrix Grid */
   text-align: left !important; 
 }
 
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-  #root {
-    padding: 0;
-    overflow-x: hidden;
-  }
-  
-  /* Disable any legacy logo animations to save CPU */
-  .logo {
-    animation: none !important;
-    filter: none !important;
-  }
-}
-
-/* --- GLOBAL SCROLL FIX --- */
+/* --- 2. GLOBAL SCROLL OPTIMIZATION --- */
 html, body {
-  /* Prevent horizontal "wobble" on mobile */
   overflow-x: hidden;
   width: 100%;
   background-color: #020617;
   scroll-behavior: smooth;
+  /* Critical for iOS kinetic scrolling */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
 }
 
-/* --- UTILITY: GPU ACCELERATION --- */
-/* Apply this to cards to ensure smooth scrolling on mobile */
-.smooth-gpu-layer {
+/* --- 3. AUTO-TURBO FOR CARDS (NO JSX EDITS NEEDED) --- */
+/* This automatically targets all your cards using Tailwind's rounded classes */
+div[class*="rounded-"], section, article {
   transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
   will-change: transform;
+  backface-visibility: hidden;
+  /* Tells the browser the "snake" inside won't affect the rest of the layout */
+  contain: paint; 
 }
 
-/* Custom Scrollbar for the Archive Grid */
+/* --- 4. MOBILE-SPECIFIC PERFORMANCE (Max 1024px) --- */
+@media (max-width: 1024px) {
+  #root {
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* KILL HEAVY EFFECTS: This is the #1 cause of mobile lag */
+  .backdrop-blur-3xl, 
+  .backdrop-blur-2xl, 
+  .backdrop-blur-xl,
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* Use a high-opacity solid color to maintain the look without the lag */
+    background-color: rgba(3, 7, 18, 0.98) !important;
+  }
+
+  /* Simplify Glow Calculations */
+  [style*="conic-gradient"] {
+    filter: blur(10px) !important; 
+  }
+
+  /* Disable hover effects on mobile to prevent "sticky" touch states */
+  .group:hover, .hover\:-translate-y-2:hover {
+    transform: none !important;
+  }
+}
+
+/* --- 5. SCROLLBAR & UTILITIES --- */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -52,4 +69,9 @@ html, body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #22d3ee;
+}
+
+/* Prevent tap highlight blue box on mobile */
+a, button, div {
+  -webkit-tap-highlight-color: transparent;
 }
