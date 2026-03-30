@@ -1,54 +1,70 @@
 import React from 'react';
 import { Search, PenTool, Terminal, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ProcessStage = ({ step, title, description, icon, accentColor = "#22d3ee" }) => (
-  <div className="relative p-[1.5px] rounded-[2.5rem] overflow-hidden group bg-[#030712] h-full transition-all duration-500 hover:-translate-y-2">
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: step * 0.1 }}
+    className="relative p-[2px] rounded-[2.5rem] overflow-hidden group bg-[#030712] h-full transition-all duration-500 hover:-translate-y-2 smooth-gpu-layer"
+    style={{ 
+      /* 🎨 HIGH-VOLTAGE BORDER: Pure color to White transition */
+      background: `linear-gradient(135deg, 
+        ${accentColor} 0%, 
+        ${accentColor} 30%, 
+        #ffffff 50%, 
+        ${accentColor} 70%, 
+        ${accentColor} 100%)` 
+    }}
+  >
     
-    {/* 🐍 ALWAYS-ACTIVE HIGH-GLOW SNAKE */}
-    <div className="absolute inset-[-150%] pointer-events-none opacity-100">
-      <div 
-        className="w-full h-full animate-[spin_6s_linear_infinite]"
-        style={{ 
-          background: `conic-gradient(from 0deg, transparent 50%, ${accentColor} 70%, #fff 90%, ${accentColor} 100%)`,
-          filter: 'blur(20px)', 
-        }}
-      />
-    </div>
+    {/* ⚡ INTENSE BACK-GLOW: Doubled opacity and increased blur */}
+    <div 
+      className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
+      style={{ 
+        background: `radial-gradient(circle at center, ${accentColor} 0%, transparent 70%)`,
+        filter: 'blur(60px)'
+      }} 
+    />
 
-    <div className="relative z-10 bg-[#030712]/98 backdrop-blur-3xl rounded-[calc(2.5rem-1.5px)] h-full p-10 flex flex-col items-center text-center border border-white/5 group-hover:border-white/10 transition-colors">
+    <div className="relative z-10 bg-[#030712] rounded-[calc(2.5rem-2px)] h-full p-10 flex flex-col items-center text-center border border-white/10 group-hover:border-white/20 transition-colors">
       
-      {/* 🧬 BACKGROUND STAGE NUMBER */}
-      <span className="absolute top-4 right-8 font-black italic text-6xl text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none font-mono">
+      {/* 🧬 STAGE NUMBER: Increased visibility on hover */}
+      <span className="absolute top-4 right-8 font-black italic text-6xl text-white/[0.03] group-hover:text-white/[0.08] transition-colors pointer-events-none font-mono">
         0{step}
       </span>
 
-      {/* ICON NODE */}
+      {/* ICON NODE WITH OVERGLOW */}
       <div className="mb-8 relative">
-        <div className="p-5 bg-white/5 border border-white/10 rounded-2xl text-slate-400 group-hover:text-white transition-all duration-500 group-hover:border-white/20 relative z-10">
-          {icon}
+        <div className="p-5 bg-white/5 border border-white/10 rounded-2xl text-slate-400 group-hover:text-white transition-all duration-500 group-hover:border-white/30 relative z-10" style={{ color: accentColor }}>
+          <div className="relative z-20 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">
+            {icon}
+          </div>
         </div>
-        {/* Sub Icon Glow */}
-        <div className="absolute inset-0 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: accentColor }} />
+        {/* Core Icon Bloom: Very intense center glow */}
+        <div className="absolute inset-0 blur-3xl opacity-40 group-hover:opacity-90 transition-opacity duration-500 rounded-full scale-150" style={{ backgroundColor: accentColor }} />
       </div>
 
-      {/* STEP LABEL */}
+      {/* STEP LABEL: Synced pulse color */}
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-        <span className="text-[10px] font-mono font-black text-cyan-500 uppercase tracking-[0.4em]">
+        <div className="w-2 h-2 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.5)]" style={{ backgroundColor: accentColor }} />
+        <span className="text-[11px] font-black uppercase tracking-[0.5em]" style={{ color: accentColor }}>
           Phase_0{step}
         </span>
       </div>
       
       {/* CONTENT */}
-      <h3 className="text-xl font-black text-white uppercase italic tracking-tighter mb-4 leading-tight">
+      <h3 className="text-xl font-black text-white uppercase italic tracking-tighter mb-4 leading-tight group-hover:scale-105 transition-transform duration-500">
         {title}
       </h3>
       
-      <p className="text-slate-500 text-xs font-medium leading-relaxed max-w-[200px] group-hover:text-slate-300 transition-colors">
+      <p className="text-slate-500 text-xs font-medium leading-relaxed max-w-[200px] group-hover:text-slate-200 transition-colors">
         {description}
       </p>
     </div>
-  </div>
+  </motion.div>
 );
 
 const HowWeWork = () => {
@@ -58,28 +74,28 @@ const HowWeWork = () => {
       icon: <Search size={24} />,
       title: "Understanding Your Needs",
       description: "I start by understanding your idea, goals, and what you want to achieve.",
-      accentColor: "#22d3ee"
+      accentColor: "#00f2ff" 
     },
     {
       step: 2,
       icon: <PenTool size={24} />,
       title: "Planning & Design",
       description: "I plan the system, design the structure, and choose the right technologies.",
-      accentColor: "#3b82f6"
+      accentColor: "#3b82f6" 
     },
     {
       step: 3,
       icon: <Terminal size={24} />,
       title: "Development",
       description: "I build the project step by step, focusing on performance and clean structure.",
-      accentColor: "#a855f7"
+      accentColor: "#a855f7" 
     },
     {
       step: 4,
       icon: <CheckCircle2 size={24} />,
       title: "Testing & Launch",
       description: "I test everything carefully and deploy the final product for real-world use.",
-      accentColor: "#10b981"
+      accentColor: "#10b981" 
     }
   ];
 
@@ -96,11 +112,11 @@ const HowWeWork = () => {
           <div className="h-[1px] w-8 bg-cyan-500/50" />
         </div>
         
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
-          My Work <span className="text-slate-800">Process</span>
+        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
+          My Work <span className="text-slate-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Process</span>
         </h2>
         
-        <p className="max-w-xl text-slate-400 text-sm md:text-base font-medium leading-relaxed italic opacity-80">
+        <p className="max-w-xl text-slate-400 text-sm md:text-base font-medium leading-relaxed italic opacity-80 mt-2">
           A simple and structured approach to turn ideas into <br className="hidden md:block" />
           real, working solutions.
         </p>

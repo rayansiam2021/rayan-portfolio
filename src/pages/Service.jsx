@@ -19,8 +19,6 @@ const Service = () => {
   return (
     <div className="min-h-screen bg-[#020617] pt-32 pb-20 selection:bg-cyan-500/30 relative overflow-hidden text-white">
       
-      {/* 01. STORY HERO */}
-      <MyApproach />
 
       {/* 02. SERVICE CATEGORIES */}
       <WhatIBuild />
