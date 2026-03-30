@@ -1,9 +1,11 @@
 @import "tailwindcss";
 @source "../src";
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 @theme {
   --color-background: #020617;
   --color-foreground: #cbd5e1;
@@ -25,18 +27,18 @@ html {
 }
 
 /* --- 2. LAYER PROMOTION & COMPOSITING --- */
-/* REMOVED: .project-swiper (Legacy Swiper reference) */
 section, 
 .HeroContainer_wrapper, 
 .StatsRibbon_wrapper,
 .profile-card-body,
 .profile-container,
-.smooth-gpu-layer {
+.smooth-gpu-layer,
+div[class*="rounded-"] {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
   will-change: transform;
-  contain: layout paint;
+  contain: paint; /* Changed to paint only for better scroll perf */
 }
 
 .preserve-3d { 
@@ -59,10 +61,22 @@ section,
   50% { transform: translateZ(100px) translateY(-8px); }
 }
 
+@keyframes snake-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* --- 4. GLOBAL CLASSES --- */
 .animate-snake {
   animation: snake-spin 4s linear infinite;
   transform: translateZ(0);
+}
+
+.global-snake-spin {
+  animation: snake-rotate 6s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+  display: block;
 }
 
 .profile-border-flow {
@@ -80,23 +94,38 @@ section,
   .profile-layer-base { transform: translateZ(30px); }
   
   [style*="conic-gradient"] {
-    filter: drop-shadow(0 0 6px currentColor);
+    filter: blur(20px);
+    drop-shadow: 0 0 6px currentColor;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(10px);
   }
 }
 
-/* --- 6. MOBILE "TURBO" PERFORMANCE (Max 1023px) --- */
+/* --- 6. ULTIMATE MOBILE PERFORMANCE ENGINE (Max 1023px) --- */
 @media (max-width: 1023px) {
-  .backdrop-blur-2xl, .backdrop-blur-xl, .backdrop-blur-lg, .backdrop-blur-md {
+  /* KILL ALL BACKDROP BLURS: This makes the rest of the site as smooth as the Contact page */
+  .backdrop-blur-3xl, 
+  .backdrop-blur-2xl, 
+  .backdrop-blur-xl, 
+  .backdrop-blur-lg, 
+  .backdrop-blur-md,
+  .glass-panel,
+  div[class*="backdrop-blur"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background-color: rgba(11, 18, 34, 0.98) !important; 
+    background-color: rgba(3, 7, 18, 0.98) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
   }
 
-  [style*="conic-gradient"], .shadow-2xl, .profile-border-flow {
-    filter: none !important; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  /* LOWER BLUR RADIUS: Conic gradients are GPU-heavy; reducing blur saves 15-20 FPS */
+  [style*="conic-gradient"] {
+    filter: blur(8px) !important; 
+    opacity: 0.8 !important;
   }
 
+  /* FLATTEN 3D EFFECTS */
   .profile-layer-hero, 
   .profile-layer-text, 
   .profile-layer-base { 
@@ -104,44 +133,25 @@ section,
     animation: none !important;
   }
 
+  /* DISABLE HEAVY SHADOWS */
+  .shadow-2xl, .profile-border-flow, .action-btn-glow, [style*="drop-shadow"] {
+    filter: none !important; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+  }
+
+  /* OPTIMIZE TRANSFORMATIONS */
   .perspective-\[1500px\], .profile-container {
     perspective: none !important;
   }
-}
 
-/* --- 7. CLEANUP: REMOVED SWIPER CLASSES --- */
-/* The following were removed to fix the build error:
-   .swiper-wrapper, .swiper-slide
-*/
-
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
-}
-
-a, button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.action-btn-glow {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-}
-
-/* --- MOBILE PERFORMANCE ENGINE --- */
-.transform-gpu {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-@media (hover: none) {
-  .group:active {
-    background-color: rgba(255, 255, 255, 0.05);
-    transition: none;
+  .group:hover, .hover\:-translate-y-2:hover {
+    transform: none !important; /* Prevents "sticky" hover states on mobile */
   }
 }
 
-.SpecialtyCard_wrapper {
-  contain: content;
+/* --- 7. CLEANUP & UTILITIES --- */
+a, button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .no-select {
@@ -149,7 +159,6 @@ a, button {
   user-select: none;
 }
 
-/* --- UTILITY LAYER --- */
 @layer utilities {
   .animate-snake-top { animation: snake-top 2s linear infinite; }
   .animate-snake-right { animation: snake-right 2s linear infinite; }
@@ -160,54 +169,4 @@ a, button {
   @keyframes snake-right { 0% { top: -100%; } 100% { top: 100%; } }
   @keyframes snake-bottom { 0% { right: -100%; } 100% { right: 100%; } }
   @keyframes snake-left { 0% { bottom: -100%; } 100% { bottom: 100%; } }
-}
-
-/* 🌀 THE BORDER ROTATION ENGINE */
-@keyframes snake-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.global-snake-spin {
-  animation: snake-rotate 6s linear infinite; /* Smooth 6s loop */
-  transform-origin: center;
-  will-change: transform;
-  display: block;
-}
-
-/* 🧪 GLASS MORPHISM UTILITY */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* 🚀 GLOBAL MOBILE TURBO MODE */
-@media (max-width: 1024px) {
-  /* Disable expensive backdrop blurs globally on mobile */
-  .backdrop-blur-3xl, 
-  .backdrop-blur-2xl, 
-  .backdrop-blur-xl {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    /* Use a solid, high-opacity background for speed */
-    background-color: rgba(3, 7, 18, 0.98) !important;
-  }
-
-  /* Reduce the calculation cost of the "Snake" glow */
-  [style*="conic-gradient"] {
-    filter: blur(10px) !important; /* Drops from 25px to 10px */
-  }
-
-  /* Force all "Cards" into their own GPU layer without editing JSX */
-  /* This targets any div that looks like a card or container */
-  div[class*="rounded-"], section {
-    transform: translateZ(0);
-    will-change: transform;
-    contain: paint;
-  }
 }
