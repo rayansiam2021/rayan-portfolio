@@ -14,7 +14,7 @@ const ProfileCard = () => {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
 
   const handleMouseMove = (e) => {
-    // ⚡ TURBO FIX: Disable hover logic on mobile to keep scroll thread free
+    // Disable hover logic on mobile to keep scroll thread free
     if (window.innerWidth < 1024) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const xPct = (e.clientX - rect.left) / rect.width - 0.5;
@@ -48,15 +48,20 @@ const ProfileCard = () => {
         {/* MAIN BODY: Uses backdrop-blur ONLY on desktop */}
         <div className="relative bg-[#0b1222]/95 md:bg-[#0b1222]/80 border border-white/10 p-8 md:p-10 rounded-[28px] shadow-2xl overflow-hidden preserve-3d md:backdrop-blur-xl">
           
-          {/* PROFILE IMAGE */}
+          {/* PROFILE IMAGE: FIX APPLIED HERE */}
           <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-8 flex items-center justify-center profile-layer-hero">
-            <div className="absolute inset-0 bg-cyan-500 rounded-2xl blur-[40px] opacity-10" />
-            <div className="p-[2px] rounded-2xl bg-gradient-to-br from-cyan-400 to-transparent">
-              <img 
-                src="/profile.png" 
-                alt="Rayan Ahmed"
-                className="w-36 h-36 md:w-44 md:h-44 object-cover rounded-2xl grayscale-[15%] group-hover:grayscale-0 transition-all duration-700"
-              />
+            {/* Ambient Glow */}
+            <div className="absolute inset-0 bg-cyan-500 rounded-2xl blur-[40px] opacity-15" />
+            
+            {/* Image Container with Laser Border */}
+            <div className="relative w-full h-full p-[2px] rounded-2xl bg-gradient-to-br from-cyan-400 to-transparent overflow-hidden">
+              <div className="w-full h-full rounded-[14px] overflow-hidden bg-[#0b1222]">
+                <img 
+                  src="/profile.png"
+                  alt="Rayan Ahmed"
+                  className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 ease-out"
+                />
+              </div>
             </div>
           </div>
 
@@ -71,8 +76,7 @@ const ProfileCard = () => {
             <div className="mt-2 flex items-center justify-center gap-2">
                <div className="h-[1px] w-6 bg-cyan-500/50" />
                <p className="text-cyan-400 font-mono text-[10px] uppercase tracking-[0.4em] font-bold">
-                 "Engineering Scalable
-Web Applications & IoT Solutions."
+                 "Engineering Scalable Web Applications & IoT Solutions."
                </p>
                <div className="h-[1px] w-6 bg-cyan-500/50" />
             </div>
@@ -81,8 +85,8 @@ Web Applications & IoT Solutions."
           {/* ACADEMIC INFO */}
           <div className="space-y-4 profile-layer-base">
             <div className="px-6 py-4 bg-white/[0.03] border border-white/5 rounded-2xl">
-              <span className="block text-slate-500 text-[9px] uppercase tracking-widest mb-1">Graduated From</span>
-              <span className="text-slate-200 font-semibold text-xs md:text-sm block">Daffodil International University</span>
+              <span className="block text-slate-500 text-[9px] uppercase tracking-widest mb-1 text-left">Graduated From</span>
+              <span className="text-slate-200 font-semibold text-xs md:text-sm block text-left">Daffodil International University</span>
             </div>
 
             <div className="flex gap-4">

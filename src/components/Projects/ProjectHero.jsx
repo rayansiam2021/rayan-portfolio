@@ -47,7 +47,7 @@ const ProjectHero = () => {
               className="justify-center items-center text-center w-full"
             >
               <h1 className="text-3xl md:text-[40px] font-black uppercase italic leading-[0.9] tracking-tighter">
-                Full-Stack & <br className="hidden md:block" /> Systems Engineer
+                Listed Projects
                 <span className="ml-2 animate-pulse" style={{ color: '#00f2ff' }}>_</span>
               </h1>
             </GradientText>
@@ -58,8 +58,8 @@ const ProjectHero = () => {
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-medium mb-10">
               As a graduate from <span className="text-white font-bold">Daffodil International University (CIS)</span>, 
               I have engineered a diverse range of technical solutions. Below is a definitive archive 
-              of my work across <span className="text-white">API development</span>, 
-              <span className="text-white"> Web ecosystems</span>, and <span className="text-cyan-400">IoT systems</span>.
+              of my work across API development, 
+               Web ecosystems, and IoT systems.
             </p>
 
             {/* High-Visibility Tech Stack */}

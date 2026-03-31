@@ -151,15 +151,13 @@ const ProjectMatrix = () => {
         viewport={{ once: true }}
         className="mb-20 text-center w-full flex flex-col items-center"
       >
-        <GradientText
-          colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-          className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic"
-        >
-          SELECTED DEPLOYMENTS
-        </GradientText>
-        <p className="mt-4 text-slate-500 text-sm md:text-base font-bold tracking-widest uppercase opacity-70">
-          // High_Performance_System_Logs
-        </p>
+                             <GradientText
+                                                                                colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                                                className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                                              >
+                                                                                Selected deplotments
+                                                                              </GradientText>
+                                                     
         <div className="mt-8 h-[2px] w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent rounded-full shadow-[0_0_15px_#00f2ff]" />
       </motion.div>
 

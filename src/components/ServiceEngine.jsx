@@ -113,12 +113,12 @@ const ServiceEngine = () => {
         viewport={{ once: true }}
         className="mb-12 text-center w-full flex flex-col items-center"
       >
-          <GradientText
-            colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-            className="text-3xl md:text-5xl font-black uppercase tracking-tighter"
-          >
-            WHAT I DO
-          </GradientText>
+                           <GradientText
+                                                                              colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                                              className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                                            >
+                                                                              What I Do
+                                                                            </GradientText>
           <div className="mt-4 h-[2px] w-20 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
       </motion.div>
 

@@ -1,5 +1,4 @@
 ﻿import React, { useEffect } from 'react';
-import MyApproach from '../components/Service/MyApproach';
 import WhatIBuild from '../components/Service/WhatIBuild';
 import HowWeWork from '../components/Service/HowWeWork';
 import MyToolbox from '../components/Service/MyToolbox';

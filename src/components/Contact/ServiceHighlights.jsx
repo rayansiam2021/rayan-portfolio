@@ -1,6 +1,8 @@
 import React from 'react';
 import { Layout, Database, Cpu, Globe2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GradientText from '../bits/GradientText';
+
 
 const ServiceHighlights = () => {
   const services = [
@@ -34,13 +36,14 @@ const ServiceHighlights = () => {
     <div className="mt-24 mb-32 px-4">
       {/* 🎯 CENTERED HEADER WITH HIGH-GLOW DIVIDER */}
       <div className="flex flex-col mb-20 items-center text-center">
-        <span className="text-[11px] font-black uppercase tracking-[0.6em] text-cyan-500 mb-4 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">
-          Capabilities_v2.0
-        </span>
-        <h2 className="text-3xl md:text-5xl font-black text-white italic uppercase tracking-tighter leading-tight">
-          Here are a few things <br /> 
-          <span className="text-slate-600 transition-colors duration-700 hover:text-white">I can help you with:</span>
-        </h2>
+        
+                         <GradientText
+                                                   colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                   className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                 >
+                                                   I can help you with
+                                                 </GradientText>
+                                                 
         
         <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-8 shadow-[0_0_15px_#06b6d4]" />
       </div>

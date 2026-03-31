@@ -1,6 +1,8 @@
 import React from 'react';
 import { Search, PenTool, Terminal, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GradientText from '../bits/GradientText';
+
 
 const ProcessStage = ({ step, title, description, icon, accentColor = "#22d3ee" }) => (
   <motion.div 
@@ -112,9 +114,12 @@ const HowWeWork = () => {
           <div className="h-[1px] w-8 bg-cyan-500/50" />
         </div>
         
-        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
-          My Work <span className="text-slate-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Process</span>
-        </h2>
+                               <GradientText
+                                                                                  colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                                                  className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                                                >
+                                                                                  My Work Process
+                                                                                </GradientText>
         
         <p className="max-w-xl text-slate-400 text-sm md:text-base font-medium leading-relaxed italic opacity-80 mt-2">
           A simple and structured approach to turn ideas into <br className="hidden md:block" />

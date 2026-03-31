@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Server, Globe, Cpu, Hexagon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import GradientText from '../bits/GradientText';
 
 const ServiceCard = ({ label, title, description, tech, icon: Icon, accentColor }) => {
   return (
@@ -125,16 +126,19 @@ const WhatIBuild = () => {
           <div className="h-[1px] w-8 bg-cyan-500/50" />
         </div>
         
-        <h2 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter text-white leading-none mb-8">
-          What <span className="text-slate-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]">I</span> Do
-        </h2>
+        <GradientText
+                                                           colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+                                                           className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                         >
+                                                           What I Do
+                                                         </GradientText>
         
         <p className="max-w-2xl text-slate-400 text-lg md:text-xl font-medium leading-relaxed italic mb-4">
           I build web applications, WordPress websites, and IoT systems <br className="hidden md:block" />
           that solve real-world problems.
         </p>
 
-        <span className="text-[10px] font-mono text-slate-600 uppercase tracking-[0.4em] font-bold">
+        <span className="text-[12px] font-mono text-slate-600 uppercase tracking-[0.4em] font-bold">
           High Performance. Scalable architecture. Clean Code.
         </span>
       </div>
