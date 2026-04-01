@@ -44,31 +44,36 @@ const SkillTerminal = () => {
   return (
     <div className="w-full max-w-4xl mx-auto font-mono relative">
       
-      {/* 🎯 CUSTOM HEADER INTEGRATION */}
-      
-                    <motion.div 
-                           initial={{ opacity: 0, y: 20 }}
-                           whileInView={{ opacity: 1, y: 0 }}
-                           viewport={{ once: true }}
-                           className="mb-8 md:mb-10 text-center w-full flex flex-col items-center"
-                         >
-                             <GradientText
-                                                   colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-                                                   className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
-                                                 >
-                                                   CAPABILITIES
-                                                 </GradientText>
-                             <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-[500px]">
-                                               Below is a list of the tech stack that I have used to solve problems across a 
-          <span className="text-cyan-400 font-bold"> 3-year development cycle </span> 
-           while being in my university and through freelance.
-                             </p>
-                             <div className="mt-4 h-[1px] w-16 bg-cyan-500/50 rounded-full" />
-                         </motion.div>
+      {/* 🎯 EXACT HEADER DESIGN INTEGRATION */}
+      <div className="flex flex-col items-center text-center mb-20 relative z-10">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-[1px] w-8 bg-cyan-500/50" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.6em] text-cyan-500 font-bold">
+            Skill_Architecture
+          </span>
+          <div className="h-[1px] w-8 bg-cyan-500/50" />
+        </div>
+        
+        <GradientText
+          colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+          className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-8"
+        >
+          Capabilities
+        </GradientText>
+        
+        <p className="max-w-2xl text-slate-400 text-lg md:text-xl font-medium leading-relaxed italic mb-4 px-6">
+          Below is a list of the tech stack that I have used to solve problems across a 
+          <span className="text-cyan-400 font-black not-italic"> 3-year development cycle.</span>
+        </p>
+
+        <span className="text-[12px] font-mono text-slate-600 uppercase tracking-[0.4em] font-bold">
+          High Performance. Scalable architecture. Clean Code.
+        </span>
+      </div>
+
       {/* TERMINAL OUTER FRAME */}
       <div className="relative p-[1px] md:p-[2.5px] rounded-[24px] overflow-hidden group smooth-gpu-layer">
         
-        {/* CSS INJECTION FOR SYNCED SPIN */}
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes terminal-snake-spin {
             from { transform: rotate(0deg); }
@@ -152,7 +157,7 @@ const SkillTerminal = () => {
                       {skill.icon}
                     </div>
                     <div>
-                      <h4 className="text-white text-sm font-bold tracking-tight">{skill.name}</h4>
+                      <h4 className="text-white text-sm font-bold tracking-tight font-sans">{skill.name}</h4>
                       <p className="text-[9px] font-black text-slate-500 uppercase mt-1 tracking-wider">{skill.label}</p>
                     </div>
                   </div>

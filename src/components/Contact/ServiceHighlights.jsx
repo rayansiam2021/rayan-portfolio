@@ -3,7 +3,6 @@ import { Layout, Database, Cpu, Globe2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GradientText from '../bits/GradientText';
 
-
 const ServiceHighlights = () => {
   const services = [
     {
@@ -33,22 +32,42 @@ const ServiceHighlights = () => {
   ];
 
   return (
+    /* Removed: bg-[#030712] */
     <div className="mt-24 mb-32 px-4">
-      {/* 🎯 CENTERED HEADER WITH HIGH-GLOW DIVIDER */}
-      <div className="flex flex-col mb-20 items-center text-center">
-        
-                         <GradientText
-                                                   colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-                                                   className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
-                                                 >
-                                                   I can help you with
-                                                 </GradientText>
-                                                 
-        
-        <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent mt-8 shadow-[0_0_15px_#06b6d4]" />
-      </div>
+      {/* 🎯 EXACT HEADER DESIGN INTEGRATION */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex flex-col mb-24 items-center text-center relative z-10"
+      >
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-[1px] w-8 bg-cyan-500/50" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.6em] text-cyan-500 font-bold">
+            Solution_Specialization
+          </span>
+          <div className="h-[1px] w-8 bg-cyan-500/50" />
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <GradientText
+          colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
+          className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-8"
+        >
+          I can help you with
+        </GradientText>
+
+        <p className="max-w-2xl text-slate-400 text-lg md:text-xl font-medium leading-relaxed italic mb-4">
+          Tailored digital solutions built with modern architecture <br className="hidden md:block" /> 
+          and hardware-level precision.
+        </p>
+
+        <span className="text-[12px] font-mono text-slate-600 uppercase tracking-[0.4em] font-bold">
+          High Performance. Scalable architecture. Clean Code.
+        </span>
+      </motion.div>
+
+      {/* GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {services.map((service, idx) => (
           <motion.div 
             key={idx}
@@ -58,7 +77,6 @@ const ServiceHighlights = () => {
             transition={{ delay: idx * 0.1 }}
             className="relative p-[2px] rounded-[2rem] overflow-hidden group h-full transition-all duration-500 hover:-translate-y-2 smooth-gpu-layer"
             style={{ 
-              /* 🎨 LASER-EDGE BORDER: High intensity white-hot center */
               background: `linear-gradient(135deg, 
                 ${service.color} 0%, 
                 ${service.color} 40%, 
@@ -67,7 +85,7 @@ const ServiceHighlights = () => {
                 ${service.color} 100%)` 
             }}
           >
-            {/* ⚡ LAYER 1: CONSTANT AMBIENT GLOW (20% Baseline) */}
+            {/* ⚡ LAYER 1: AMBIENT GLOW */}
             <div 
               className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"
               style={{
@@ -76,7 +94,7 @@ const ServiceHighlights = () => {
               }}
             />
 
-            {/* ⚡ LAYER 2: INTENSE HOVER BLOOM (Activates on hover) */}
+            {/* ⚡ LAYER 2: HOVER BLOOM */}
             <div 
               className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"
               style={{
@@ -87,11 +105,9 @@ const ServiceHighlights = () => {
 
             <div className="relative z-10 bg-[#030712] p-10 rounded-[calc(2rem-2px)] h-full flex flex-col border border-white/10 group-hover:border-white/20 transition-all">
               
-              {/* Glowing Icon Container */}
               <div className="mb-8 p-4 w-fit rounded-2xl bg-white/5 border border-white/10 relative group-hover:scale-110 group-hover:border-white/30 transition-all duration-500"
                    style={{ color: service.color }}>
                 {service.icon}
-                {/* Icon Back-Glow */}
                 <div className="absolute inset-0 blur-xl opacity-40 group-hover:opacity-100 transition-opacity rounded-full" 
                      style={{ backgroundColor: service.color }} />
               </div>
@@ -104,7 +120,6 @@ const ServiceHighlights = () => {
                 {service.desc}
               </p>
 
-              {/* Decorative Footer Bars */}
               <div className="mt-auto pt-8 flex gap-1">
                 {[1,2,3].map(i => (
                   <div key={i} className="w-4 h-1 rounded-full bg-white/10 group-hover:bg-current transition-colors" 
