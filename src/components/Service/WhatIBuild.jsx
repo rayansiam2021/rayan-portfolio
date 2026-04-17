@@ -128,7 +128,7 @@ const WhatIBuild = () => {
         
         <GradientText
                                                            colors={["#00f2ff", "#ffffff", "#00d4ff", "#3b82f6", "#00f2ff"]}
-                                                           className="text-5xl md:text-4xl font-black uppercase tracking-tighter"
+                                                           className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8"
                                                          >
                                                            What I Do
                                                          </GradientText>

@@ -115,6 +115,8 @@ export const projectsData = [
       live: "https://vidmocraft.com/"
     }
   },
+   
+  
 
   {
     id: "qatar-ac-repairs",
@@ -175,6 +177,132 @@ export const projectsData = [
     }
   },
 
+  {
+  id: "paddleboard-qc",
+  title: "PaddleBoard QC",
+  category: "Wordpress",
+  shortDesc: "A professionally developed eCommerce WordPress website for a Canadian client, focused on showcasing paddleboard products with a clean and conversion-driven user experience.",
+  
+  banner: "/assets/projectimg/paddleboard/paddleboard-banner.png",
+
+  techStack: [
+    { name: "WordPress" },
+    { name: "WooCommerce" },
+    { name: "Elementor" },
+    { name: "UI/UX Design" },
+    { name: "SEO" }
+  ],
+
+  screenshots: [
+    "/assets/projectimg/paddleboard/paddleboard.png",
+    "/assets/projectimg/paddleboard/paddleboard1.png",
+    "/assets/projectimg/paddleboard/paddleboard2.png",
+    "/assets/projectimg/paddleboard/paddleboard3.png"
+  ],
+
+  status: "LIVE_PRODUCTION",
+  color: "#06b6d4",
+  date: "2026",
+
+  blogContent: {
+    overview: {
+      intro: "A professionally designed eCommerce website built using WordPress and Elementor for an international client, focused on presenting paddleboard products in a clean and engaging format.",
+      points: [
+        "Designed a modern and structured layout using Elementor",
+        "Showcased paddleboards and accessories with clear product sections",
+        "Conversion-focused UI with strong call-to-action placements",
+        "Fully responsive design optimized for all devices"
+      ]
+    },
+    implementation: {
+      intro: "Executed the client’s vision into a scalable and high-performing eCommerce platform.",
+      points: [
+        "Integrated WooCommerce for complete product and order management",
+        "Structured product categories for better navigation and usability",
+        "Designed promotional and featured product sections",
+        "Optimized performance for faster loading and smoother experience"
+      ]
+    },
+    challenge: {
+      intro: "The main challenge was balancing visual appeal with performance and usability.",
+      points: [
+        "Managing high-quality images without affecting load speed",
+        "Maintaining a clean layout while displaying multiple products",
+        "Ensuring smooth user experience across all screen sizes"
+      ]
+    },
+    results: {
+      intro: "The final product delivers a professional and conversion-optimized shopping experience.",
+      points: [
+        "Successfully delivered a scalable and client-focused website",
+        "Improved product visibility and user engagement",
+        "Achieved a responsive and performance-optimized platform"
+      ]
+    }
+  },
+
+  links: {
+    live: "https://paddleboardqc.ca/"
+  }
+},
+{
+    id: "dave-mayer-construction",
+    title: "Dave Mayer Construction",
+    category: "Wordpress",
+    shortDesc: "An enterprise-grade service platform for a premier construction firm, featuring bilingual content architecture and high-performance media delivery.",
+    banner: "/assets/projectimg/davemayer/davemayer-banner.png", 
+    techStack: [
+      { name: "WordPress" }, { name: "Elementor Pro" }, { name: "WPML (Bilingual)" }, { name: "Asset Optimization" }
+    ],
+    screenshots: [
+      "/assets/projectimg/davemayer/davemayer.png",
+      "/assets/projectimg/davemayer/davemayer1.png",
+      "/assets/projectimg/davemayer/davemayer2.png",
+      "/assets/projectimg/davemayer/davemayer3.png"
+    ],
+    status: "LIVE_PRODUCTION",
+    color: "#10b981", // Emerald Green for an industrial yet premium professional look
+    date: "Jan 2026",
+    blogContent: {
+      overview: {
+        intro: "Developed as a flagship client project for Vista Web, this platform was engineered for Dave Mayer Construction & Rénovation, an industry leader in the Outaouais region with 30+ years of expertise.",
+        points: [
+          "Enterprise WordPress deployment focused on service transparency and lead generation",
+          "Engineered a bilingual (French/English) UI to cater to a diverse regional market",
+          "Showcasing high-end architectural solutions like Sunspace and custom renovations",
+          "Strategically designed for a 'Virtual Showroom' user experience"
+        ]
+      },
+      implementation: {
+        intro: "The technical execution focused on translating complex physical construction services into a highly scannable, high-conversion digital environment.",
+        points: [
+          "Developed modular service components for 10+ distinct construction categories",
+          "Implemented hardware-accelerated gallery systems for high-resolution project displays",
+          "Customized global CSS design tokens to maintain brand integrity across all sub-pages",
+          "Integrated SEO-optimized metadata structures for competitive regional ranking"
+        ]
+      },
+      challenge: {
+        intro: "The primary challenge was balancing heavy visual storytelling with extreme technical performance requirements.",
+        points: [
+          "Optimizing 'Largest Contentful Paint' (LCP) for media-heavy landing pages",
+          "Ensuring a seamless, responsive experience for complex technical tables and galleries",
+          "Maintaining sub-2-second load times while handling high-bitrate image assets"
+        ]
+      },
+      results: {
+        intro: "A robust, scalable digital ecosystem that successfully mirrors the client's 30-year legacy of honesty and quality.",
+        points: [
+          "Successfully digitized 30+ years of construction expertise into a modern lead-gen tool",
+          "100% feature execution including bilingual architecture and custom project portfolios",
+          "Delivered an intuitive CMS that allows the client to update their 'Réalisations' independently"
+        ]
+      }
+    },
+    links: {
+      live: "https://davemayerconstruction.com/"
+    }
+},
   // --- IOT ---
   {
     id: "iot-autonomous-pathfinder",
@@ -190,7 +318,7 @@ export const projectsData = [
       "/assets/projectimg/obstacle-car/circuit.png"
     ],
     status: "HARDWARE_VERIFIED",
-    color: "#3b82f6",
+    color: "#15e059",
     date: "October 2025",
     blogContent: {
       overview: {
@@ -226,5 +354,63 @@ export const projectsData = [
       github: "https://github.com/rayansiam2021/IOT",
       download: "https://github.com/rayansiam2021/IOT/raw/main/221-16-641_Rayan%20Ahmed_IOT%20ALL.zip"
     }
-  }
+  },
+  {
+    id: "solarium-hautes-laurentides",
+    title: "Solarium Hautes Laurentides",
+    category: "Wordpress",
+    shortDesc: "A premium architectural service platform for a high-end French client, specializing in custom sunroom solutions and outdoor living spaces.",
+    banner: "/assets/projectimg/solarium/solarium-banner.png", 
+    techStack: [
+      { name: "WordPress" }, { name: "Elementor Pro" }, { name: "Multilingual Architecture" }, { name: "Custom CSS" }
+    ],
+    screenshots: [
+      "/assets/projectimg/solarium/solarium-1.png",
+      "/assets/projectimg/solarium/solarium-2.png",
+      "/assets/projectimg/solarium/solarium-3.png",
+      "/assets/projectimg/solarium/solarium-4.png"
+    ],
+    status: "LIVE_PRODUCTION",
+    color: "#f59e0b", // Warm Amber
+    date: "Feb 2026",
+    blogContent: {
+      overview: {
+        intro: "Developed for a French client in the Québec region, Solarium Hautes Laurentides is a robust digital platform showcasing 30+ years of expertise in high-end exterior construction.",
+        points: [
+          "Bespoke WordPress environment designed for high-ticket architectural services",
+          "Advanced product categorization for Sunspace Model 100-400 systems",
+          "Bilingual integration (FR/EN) to capture a wide regional demographic",
+          "Engineered with a 'Clé en main' (Turnkey) business logic to drive high-value leads"
+        ]
+      },
+      implementation: {
+        intro: "The implementation focused on a 'High-Light' design language—prioritizing clarity, warmth, and visual expansiveness to match the physical product.",
+        points: [
+          "Integrated dynamic gallery modules with hardware-accelerated transitions",
+          "Developed custom responsive break-points for media-heavy service pages",
+          "Applied global typography scales optimized for professional French content",
+          "Configured secure, automated lead-capture pipelines for project quotations"
+        ]
+      },
+      challenge: {
+        intro: "The challenge was conveying technical architectural details while maintaining an emotional, lifestyle-oriented visual appeal.",
+        points: [
+          "Optimizing multi-layered image compositions for rapid mobile rendering",
+          "Maintaining layout integrity across complex French text strings (often longer than English)",
+          "Balancing high-resolution architectural renders with site performance KPIs"
+        ]
+      },
+      results: {
+        intro: "A sophisticated production environment that successfully digitizes a heritage family business into a modern competitive force.",
+        points: [
+          "Delivered a pixel-perfect digital showroom covering 12+ specialized product lines",
+          "Achieved zero-latency navigation across heavy image-driven landing pages",
+          "100% client satisfaction in translating a 30-year physical legacy into a digital brand"
+        ]
+      }
+    },
+    links: {
+      live: "https://solariumhauteslaurentides.com/"
+    }
+},
 ];
